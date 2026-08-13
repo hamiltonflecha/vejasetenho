@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Veja se Tenho — descontos indevidos, consignado e benefícios do INSS</title>
+<meta name="description" content="Veja se você tem descontos indevidos no benefício do INSS ou na conta bancária, refinanciamento ou novo consignado não reconhecido, e a viabilidade de aposentadoria, LOAS e BPC.">
+<link rel="canonical" href="https://vejasetenho.com.br/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Veja se Tenho">
+<meta property="og:description" content="Veja se você tem descontos indevidos no benefício do INSS ou na conta bancária, refinanciamento ou novo consignado não reconhecido, e a viabilidade de aposentadoria, LOAS e BPC.">
+<meta property="og:url" content="https://vejasetenho.com.br/">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Veja se Tenho">
+<meta name="twitter:description" content="Veja se você tem descontos indevidos no benefício do INSS ou na conta bancária, refinanciamento ou novo consignado não reconhecido, e a viabilidade de aposentadoria, LOAS e BPC.">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Barra superior -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="brand"><a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:7px;"><img src="favicon.svg" alt="" style="width:24px;height:24px;border-radius:6px;">Veja se<span>Tenho</span></a></div>
+    </div>
+    <nav>
+      <a href="index.html" class="ativo">Início</a>
+      <a href="index.html#veja-se-tenho">Veja se tenho</a>
+      <a href="documentos.html">Documentos</a>
+      <a href="viabilidade-beneficios.html">Viabilidade</a>
+      <a href="ajuda.html">Ajuda</a>
+    </nav>
+    <div class="topbar-right">
+      <div class="topbar-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="siteSearch" placeholder="Buscar no site..." aria-label="Buscar no site">
+      </div>
+      <div class="topbar-icons">
+        <a href="#" onclick="event.preventDefault();compartilharSite();" class="icon-link icon-share" aria-label="Compartilhar" title="Compartilhar"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L7.04 9.81C6.5 9.31 5.79 9 5 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg></a>
+        <a href="mailto:contato@vejasetenho.com.br" class="icon-link icon-email" aria-label="Enviar e-mail" title="Enviar e-mail"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="searchResults" class="search-results"></div>
+
+<!-- Sidebar esquerda -->
+<div class="sidebar">
+<div class="sidebar-version">v1.0</div>
+<div class="sidebar-group">
+<div class="sidebar-label">Início</div>
+<a href="index.html" class="ativo">Home</a>
+</div>
+<div class="sidebar-group">
+<div class="sidebar-label">Veja se tenho</div>
+<a href="refinanciamento.html">Refin (grátis)</a>
+<a href="novo-emprestimo.html">Novo (grátis)</a>
+<a href="portabilidade.html">Portabilidade (grátis)</a>
+<a href="margem-consignavel.html">Margem consignável</a>
+<ul class="sublist">
+<li><a href="margem-consignavel.html#previsao">Previsão</a></li>
+<li><a href="margem-consignavel.html#positiva">Margem positiva — valor a receber</a></li>
+<li><a href="margem-consignavel.html#negativa">Margem negativa</a></li>
+</ul>
+<a href="descontos-indevidos.html">Descontos indevidos</a>
+<ul class="sublist">
+<li><a href="descontos-indevidos.html#beneficio">No benefício</a></li>
+<li><a href="descontos-indevidos.html#conta">Na conta bancária</a></li>
+</ul>
+</div>
+<div class="sidebar-group">
+<div class="sidebar-label">Estudos de viabilidade</div>
+<a href="viabilidade-beneficios.html">Aposentadoria, LOAS e BPC</a>
+<a href="acoes-inss-bancos.html">Ações contra INSS e bancos</a>
+</div>
+<div class="sidebar-group">
+<div class="sidebar-label">Documentos necessários</div>
+<a href="documentos.html">Índice de documentos</a>
+<ul class="sublist">
+<li><a href="documentos.html#cnis">CNIS</a></li>
+<li><a href="documentos.html#extrato-consignado">Extrato de empréstimos consignados</a></li>
+<li><a href="documentos.html#extrato-bancario">Extrato bancário</a></li>
+<li><a href="documentos.html#historico-creditos">Histórico de créditos (SCR)</a></li>
+</ul>
+</div>
+<div class="sidebar-group">
+<div class="sidebar-label">Ajuda</div>
+<a href="ajuda.html">Perguntas frequentes</a>
+</div>
+</div>
+
+<div class="main">
+
+
+  <div class="hero" id="inicio">
+    <div class="wrap">
+      <div class="hop">Ponto de partida</div>
+      <h1>Veja se você tem descontos indevidos no seu benefício do INSS ou na sua conta bancária.</h1>
+      <p class="lede">Analisamos empréstimos consignados do INSS, descontos em benefícios e em contas bancárias, e a viabilidade de aposentadoria, LOAS, BPC e outros recursos junto ao INSS. Tudo em linguagem simples, para você entender o que está acontecendo com o seu dinheiro antes de decidir o próximo passo.</p>
+      <a href="#veja-se-tenho" class="btn" style="margin-top:16px;">Veja se tenho</a>
+    </div>
+  </div>
+
+  <section id="sobre">
+    <div class="wrap">
+      <div class="hop">O que fazemos aqui</div>
+      <h2>Descontos consignados, benefícios e contas bancárias — sob a lupa</h2>
+      <p>Tratamos aqui de empréstimos consignados do INSS e de descontos indevidos nos benefícios. Analisamos esses descontos e também os descontos em contas bancárias, para ajudar você a entender se algum valor está sendo cobrado sem sua autorização ou fora do que foi contratado.</p>
+      <p>A partir dessa análise, estudamos a hipótese de ações contra o INSS e contra bancos. <strong>Não somos advogados</strong> — fazemos uma análise crítica dos seus documentos e sugerimos possíveis caminhos. Cabe a você consultar um(a) advogado(a) sempre que nossas sugestões apontarem nessa direção.</p>
+      <p>Também estudamos a viabilidade de aposentadorias, LOAS, BPC e outros recursos disponíveis junto ao INSS, para você saber se pode ter direito a algo que ainda não recebe.</p>
+      <div class="notice">
+        <strong>Aviso importante:</strong> este site oferece informação e análise crítica de caráter educativo. Não somos um escritório de advocacia nem substituímos aconselhamento jurídico, contábil ou financeiro profissional. Quando a situação indicar a necessidade, recomendamos a consulta a um(a) advogado(a) de confiança.
+      </div>
+    </div>
+  </section>
+
+  <section id="veja-se-tenho">
+    <div class="wrap">
+      <div class="hop">Veja se tenho</div>
+      <h2>Comece por aqui</h2>
+      <p>Escolha o que você quer verificar. As três primeiras análises são gratuitas.</p>
+      <div class="grid grid-2">
+        <a class="tool-link" href="refinanciamento.html">
+          <div class="hop">Verificação</div>
+          <h3>Refin</h3>
+          <p>Veja se você já tem um refinanciamento de empréstimo consignado ativo no seu benefício.</p>
+          <span class="tag-gratis">Grátis</span>
+        </a>
+        <a class="tool-link" href="novo-emprestimo.html">
+          <div class="hop">Verificação</div>
+          <h3>Novo</h3>
+          <p>Veja se foi contratado um novo empréstimo consignado em seu nome, com ou sem sua autorização.</p>
+          <span class="tag-gratis">Grátis</span>
+        </a>
+        <a class="tool-link" href="portabilidade.html">
+          <div class="hop">Verificação</div>
+          <h3>Portabilidade</h3>
+          <p>Veja se houve portabilidade do seu consignado para outra instituição — e se as condições realmente melhoraram.</p>
+          <span class="tag-gratis">Grátis</span>
+        </a>
+        <a class="tool-link" href="margem-consignavel.html">
+          <div class="hop">Análise</div>
+          <h3>Margem</h3>
+          <p>Previsão de margem, margem positiva (valor a receber) e margem negativa — entenda o que cada uma significa.</p>
+        </a>
+        <a class="tool-link" href="descontos-indevidos.html">
+          <div class="hop">Análise</div>
+          <h3>Desconto indevido no benefício</h3>
+          <p>Identifique cobranças no seu benefício do INSS que você não reconhece ou não autorizou.</p>
+        </a>
+        <a class="tool-link" href="descontos-indevidos.html#conta">
+          <div class="hop">Análise</div>
+          <h3>Desconto indevido na conta bancária</h3>
+          <p>Identifique tarifas, seguros e descontos lançados na sua conta sem autorização clara.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="viabilidade">
+    <div class="wrap">
+      <div class="hop">Estudos de viabilidade</div>
+      <div class="grid grid-2">
+        <a class="tool-link" href="viabilidade-beneficios.html">
+          <div class="hop">Estudo</div>
+          <h3>Aposentadoria, LOAS e BPC</h3>
+          <p>Veja se você pode ter direito a se aposentar agora, ou a benefícios assistenciais como LOAS e BPC.</p>
+        </a>
+        <a class="tool-link" href="acoes-inss-bancos.html">
+          <div class="hop">Estudo</div>
+          <h3>Ações contra INSS e bancos</h3>
+          <p>Entenda, em linhas gerais, quando uma situação costuma justificar buscar orientação jurídica.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="documentos-resumo">
+    <div class="wrap">
+      <div class="hop">Antes de começar</div>
+      <h2>Os documentos que você vai precisar</h2>
+      <p>Para fazer qualquer uma dessas análises com segurança, você vai precisar de alguns documentos. Ensinamos o que são e como retirá-los, todos de forma gratuita.</p>
+      <div class="grid grid-2">
+        <a class="tool-link" href="documentos.html#cnis">
+          <div class="hop">Documento</div>
+          <h3>CNIS</h3>
+          <p>Seu histórico de vínculos e contribuições ao INSS.</p>
+        </a>
+        <a class="tool-link" href="documentos.html#extrato-consignado">
+          <div class="hop">Documento</div>
+          <h3>Extrato de empréstimos consignados</h3>
+          <p>Lista dos contratos ativos com desconto no seu benefício.</p>
+        </a>
+        <a class="tool-link" href="documentos.html#extrato-bancario">
+          <div class="hop">Documento</div>
+          <h3>Extrato bancário</h3>
+          <p>Movimentações e descontos lançados na sua conta.</p>
+        </a>
+        <a class="tool-link" href="documentos.html#historico-creditos">
+          <div class="hop">Documento</div>
+          <h3>Histórico de créditos</h3>
+          <p>Relatório do Banco Central (Registrato/SCR) com todas as operações de crédito em seu nome.</p>
+        </a>
+      </div>
+      <p style="margin-top:20px;"><a href="documentos.html" class="btn">Ver guia completo de documentos</a></p>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="wrap">
+      Veja se Tenho — análise de descontos consignados do INSS e de contas bancárias, e estudo de viabilidade de benefícios previdenciários. Não somos um escritório de advocacia; nossas análises são de caráter informativo e não substituem a consulta a um(a) advogado(a).
+    </div>
+  </footer>
+
+</div><!-- /main -->
+
+<script>
+const searchIndex = [{"t": "Home", "d": "Página inicial do Veja se Tenho", "u": "index.html"}, {"t": "Refin (grátis)", "d": "Verifique se você já tem um refinanciamento de consignado ativo", "u": "refinanciamento.html"}, {"t": "Novo empréstimo (grátis)", "d": "Verifique se um novo consignado foi contratado em seu nome", "u": "novo-emprestimo.html"}, {"t": "Portabilidade (grátis)", "d": "Entenda e verifique portabilidades de consignado", "u": "portabilidade.html"}, {"t": "Margem consignável", "d": "Previsão de margem, margem positiva e margem negativa", "u": "margem-consignavel.html"}, {"t": "Descontos indevidos", "d": "Descontos indevidos no benefício e na conta bancária", "u": "descontos-indevidos.html"}, {"t": "Aposentadoria, LOAS e BPC", "d": "Estudo de viabilidade de aposentadoria, LOAS e BPC", "u": "viabilidade-beneficios.html"}, {"t": "Ações contra INSS e bancos", "d": "Análise crítica sobre possíveis ações judiciais e administrativas", "u": "acoes-inss-bancos.html"}, {"t": "Documentos necessários", "d": "CNIS, extrato de consignado, extrato bancário e histórico de créditos", "u": "documentos.html"}, {"t": "CNIS", "d": "O que é e como tirar o CNIS pelo Meu INSS", "u": "documentos.html#cnis"}, {"t": "Extrato de empréstimos consignados", "d": "Como emitir o extrato de consignado pelo Meu INSS", "u": "documentos.html#extrato-consignado"}, {"t": "Extrato bancário", "d": "Como obter o extrato bancário para análise de descontos", "u": "documentos.html#extrato-bancario"}, {"t": "Histórico de créditos", "d": "Registrato e SCR do Banco Central", "u": "documentos.html#historico-creditos"}, {"t": "Ajuda", "d": "Perguntas frequentes e contato", "u": "ajuda.html"}];
+
+function normalizar(s){
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function buscar(q){
+  const nq = normalizar(q);
+  if(nq.length < 2) return [];
+  return searchIndex.filter(i =>
+    normalizar(i.t).includes(nq) || normalizar(i.d).includes(nq)
+  ).slice(0,10);
+}
+function renderResultados(items){
+  const box = document.getElementById("searchResults");
+  if(items.length === 0){
+    box.innerHTML = '<div class="rempty">Nada encontrado.</div>';
+    box.classList.add("show");
+    return;
+  }
+  box.innerHTML = items.map(i =>
+    '<a href="' + i.u + '"><div class="rtitle">' + i.t + '</div><div class="rsnippet">' + i.d + '</div></a>'
+  ).join("");
+  box.classList.add("show");
+}
+document.addEventListener("DOMContentLoaded", function(){
+  const inp = document.getElementById("siteSearch");
+  const box = document.getElementById("searchResults");
+  if(inp){
+    inp.addEventListener("input", function(){
+      const r = buscar(this.value);
+      if(this.value.trim().length < 2){ box.classList.remove("show"); return; }
+      renderResultados(r);
+    });
+    inp.addEventListener("blur", function(){ setTimeout(()=>box.classList.remove("show"), 200); });
+    inp.addEventListener("focus", function(){ if(this.value.trim().length >= 2){ renderResultados(buscar(this.value)); } });
+  }
+});
+
+function compartilharSite(){
+  const url = "https://vejasetenho.com.br";
+  const txt = "Veja se você tem direito a revisão de descontos do INSS ou de bancos: " + url;
+  if(navigator.share){
+    navigator.share({title:"Veja se Tenho", text:"Análise de descontos consignados do INSS", url:url}).catch(()=>{});
+  } else {
+    window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank");
+  }
+}
+</script>
+
+</body>
+</html>
