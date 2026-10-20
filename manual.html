@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link rel="shortcut icon" href="favicon.ico">
+
+<title>SMSMass</title>
+<meta name="description" content="Guia completo passo a passo do aplicativo SMSMass: preparar contatos, instalar, ativar, mensagem, intervalo e relatório.">
+<link rel="canonical" href="https://smsmass.com.br/manual.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Manual do App SMSMass — Índice">
+<meta property="og:description" content="Guia completo passo a passo do aplicativo SMSMass: preparar contatos, instalar, ativar, mensagem, intervalo e relatório.">
+<meta property="og:url" content="https://smsmass.com.br/manual.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Manual do App SMSMass — Índice">
+<meta name="twitter:description" content="Guia completo passo a passo do aplicativo SMSMass: preparar contatos, instalar, ativar, mensagem, intervalo e relatório.">
+
+<link rel="stylesheet" href="style.css?v=57">
+<style>
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:#fff;border-bottom:1px solid var(--line);
+  height:54px;display:flex;align-items:center;
+  -webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;
+}
+.topbar-inner{
+  width:100%;padding:0 24px;
+  display:flex;align-items:center;justify-content:flex-start;gap:20px;
+}
+.topbar .brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;}
+.topbar .brand span{color:var(--green);}
+.topbar nav{display:flex;gap:18px;font-size:.88rem;margin-left:170px;}
+.topbar nav a{color:var(--green);}
+.topbar nav a:hover{color:var(--navy);text-decoration:none;}
+
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.topbar-search{
+  display:flex;align-items:center;background:var(--paper-dim);
+  border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:.85rem;
+}
+.topbar-search input{
+  border:none;background:transparent;outline:none;font-size:.85rem;width:160px;
+  color:var(--navy);font-family:'Inter',sans-serif;
+}
+.topbar-search input::placeholder{color:var(--slate);}
+.topbar-search .search-icon{color:var(--slate);margin-right:6px;}
+.topbar-help{color:var(--green);font-size:.88rem;text-decoration:none;}
+.topbar-help:hover{color:var(--navy);text-decoration:none;}
+
+.topbar-icons{display:flex;align-items:center;gap:10px;margin-left:4px;}
+.icon-link{color:#fff;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;transition:transform .12s, opacity .12s;line-height:0;}
+.icon-link svg{width:19px;height:19px;}
+.icon-link:hover{transform:scale(1.08);opacity:.88;}
+.icon-link.icon-share{background:#37474F;}
+.icon-link.icon-whats{background:#25D366;}
+.icon-link.icon-email{background:#1A73E8;}
+
+.aviso-especial{color:#C0392B;font-weight:700;}
+.sidebar-version{padding:4px 18px 12px;color:var(--slate);font-size:.72rem;letter-spacing:.04em;font-family:monospace;}
+
+/* Search results dropdown */
+.search-results{
+  position:fixed;top:54px;right:24px;
+  background:#fff;border:1px solid var(--line);border-radius:4px;
+  width:340px;max-height:400px;overflow-y:auto;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  z-index:200;display:none;
+}
+.search-results.show{display:block;}
+.search-results a{
+  display:block;padding:10px 14px;color:var(--navy);
+  border-bottom:1px solid var(--line);text-decoration:none;font-size:.88rem;
+}
+.search-results a:last-child{border-bottom:none;}
+.search-results a:hover{background:var(--paper-dim);}
+.search-results .rtitle{color:var(--green);}
+.search-results .rsnippet{color:var(--slate);font-size:.8rem;margin-top:2px;}
+.search-results .rempty{padding:14px;color:var(--slate);font-size:.85rem;text-align:center;}
+
+/* Sidebar */
+.sidebar{
+  position:fixed;top:54px;left:0;bottom:0;width:230px;
+  background:var(--paper-dim);border-right:1px solid var(--line);
+  overflow-y:auto;padding:20px 0;
+  -webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;
+}
+.sidebar-group{margin-bottom:8px;}
+.sidebar-label{
+  font-family:'Inter',sans-serif;
+  font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;
+  color:#000;font-weight:700;padding:14px 18px 4px;
+}
+.sidebar-group.compact a{padding:4px 18px;}
+.sidebar a{
+  display:block;padding:7px 18px;font-size:.88rem;color:var(--green);
+  border-left:2px solid transparent;transition:border-color .12s, background .12s;
+  text-decoration:none;
+}
+.sidebar a:hover{background:var(--paper);border-left-color:var(--green);text-decoration:none;color:var(--navy);}
+.sidebar a.ativo{border-left-color:var(--green-bright);color:var(--green);font-weight:600;}
+
+.sidebar .sublist{
+  list-style:disc;
+  margin:0 0 4px 42px;
+  padding:0;
+}
+.sidebar .sublist li{margin:0;padding:0;}
+.sidebar .sublist a{
+  display:block;padding:3px 0;font-size:.82rem;color:var(--green);
+  border-left:none;
+}
+.sidebar .sublist a:hover{color:var(--navy);background:transparent;text-decoration:underline;}
+
+/* Sidebar: grupos colapsáveis (details/summary) */
+.sidebar details{margin:0;}
+.sidebar summary{
+  list-style:none;cursor:pointer;display:block;
+  padding:7px 18px;font-size:.88rem;
+}
+.sidebar summary::-webkit-details-marker{display:none;}
+.sidebar summary::after{content:'+';color:var(--slate);font-family:monospace;}
+.sidebar details[open] summary::after{content:'−';}
+.sidebar summary a{display:inline;padding:0;border-left:none;}
+.sidebar summary:hover{background:var(--paper);}
+.sidebar details .sublist{margin-top:0;}
+.sidebar .sublist + details summary{padding-top:2px;}
+
+/* Main content */
+.main{margin-left:230px;margin-top:54px;min-height:calc(100vh - 54px);}
+
+/* Hamburger mobile */
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+.menu-toggle span{display:block;width:22px;height:2px;background:var(--navy);margin:4px 0;}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .2s;}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .menu-toggle{display:block;}
+  .topbar nav{display:none;}
+}
+@media(max-width:1024px){
+  .topbar-search{display:none;}
+  .topbar-inner{padding:0 14px;gap:10px;}
+  .topbar-icons{gap:6px;flex-shrink:0;}
+  .icon-link{width:30px;height:30px;border-radius:8px;flex-shrink:0;}
+  .icon-link svg{width:16px;height:16px;}
+}
+:target{scroll-margin-top:70px;}
+.app-screen-wrap{position:relative;display:inline-block;max-width:280px;width:100%;}
+.app-screen-wrap img{width:100%;display:block;border-radius:8px;border:1px solid var(--line);}
+.app-pin{
+  position:absolute;
+  width:24px;height:24px;
+  border-radius:50%;
+  background:var(--green);
+  color:#fff;
+  font-weight:700;
+  font-size:.8rem;
+  display:flex;align-items:center;justify-content:center;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 0 3px rgba(255,255,255,.85);
+}
+.app-legend{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:10px;}
+.app-legend li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;}
+.app-legend .app-legend-num{
+  flex-shrink:0;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:var(--green);
+  color:#fff;
+  font-weight:700;
+  font-size:.75rem;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;
+}
+.app-screen-row{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start;margin-top:20px;}
+.app-screen-col{flex:1;min-width:260px;}
+</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffffff">
+<script src="pwa.js" defer></script>
+</head>
+<body>
+<!-- Barra superior -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open'); document.getElementById('menuHint').classList.remove('show'); localStorage.setItem('menuHintVisto','1');" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="menu-hint" id="menuHint">↖ Abra o menu</div>
+      <div class="brand"><a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:7px;"><img src="favicon-32.png" alt="" style="width:24px;height:24px;border-radius:6px;">SMS<span>Mass</span></a></div>
+    </div>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="planos.html#planos">Produtos</a>
+      <a href="index.html#ferramentas">Ferramentas</a>
+      <a href="index.html#artigos">Artigos</a>
+      <a href="planos.html">Planos</a>
+      <a href="manual.html">Manual</a>
+      <a href="ajuda.html">Ajuda</a>
+      <a href="mapa-do-site.html">Mapa do site</a>
+    </nav>
+    <div class="topbar-right">
+      <div class="topbar-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="siteSearch" placeholder="Buscar no site..." aria-label="Buscar no site">
+      </div>
+      <div class="topbar-icons">
+        <a href="#" onclick="event.preventDefault();compartilharSite();" class="icon-link icon-share" aria-label="Compartilhar" title="Compartilhar"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L7.04 9.81C6.5 9.31 5.79 9 5 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg></a>
+        <a href="https://wa.me/5531991271321?text=Ol%C3%A1%2C%20vim%20pelo%20site%20SMSMass" target="_blank" rel="noopener" class="icon-link icon-whats" aria-label="Falar no WhatsApp" title="Falar no WhatsApp"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.45 1.27 4.9L2 22l5.24-1.24C8.63 21.55 10.27 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.1c-.22.62-1.28 1.2-1.77 1.24-.45.05-.92.22-3.1-.65-2.62-1.05-4.3-3.68-4.44-3.85-.13-.18-1.05-1.4-1.05-2.67 0-1.27.67-1.89.9-2.15.23-.25.5-.31.67-.31h.47c.15 0 .35-.03.55.42.22.5.75 1.78.81 1.9.07.14.11.29.02.47-.08.18-.13.29-.26.44-.13.16-.28.35-.4.47-.13.13-.27.28-.11.55.15.28.7 1.16 1.51 1.88 1.04.92 1.92 1.22 2.2 1.36.28.14.44.13.6-.04.18-.18.72-.83.91-1.11.2-.29.4-.24.65-.14.27.09 1.67.77 1.95.92.28.14.47.21.55.33.07.11.07.66-.15 1.25z"/></svg></a>
+        <a href="mailto:dev-io@outlook.com" class="icon-link icon-email" aria-label="Enviar e-mail" title="Enviar e-mail"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="searchResults" class="search-results"></div>
+
+<!-- Sidebar esquerda -->
+<div class="sidebar">
+  <div class="sidebar-version">v081</div>
+  <div class="sidebar-group compact">
+    <div class="sidebar-label">Início</div>
+    <a href="index.html">Home</a>
+    <a href="loja.html">Loja</a>
+    <a href="afiliados.html">Programa de Afiliados</a>
+    <a href="mapa-do-site.html">Mapa do site</a>
+    <a href="#" class="pwa-instalar" style="display:none">📲 Instalar no celular</a>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-label">Ferramentas</div>
+    <a href="index.html">O app SMSMass</a>
+    <ul class="sublist">
+      <li><a href="index.html#o-que-faz">O que faz</a></li>
+      <li><a href="index.html#planos">Invista já</a></li>
+    </ul>
+    <details>
+      <summary><a href="planos.html">Planos</a></summary>
+      <ul class="sublist">
+        <li><a href="planos.html#planos">Planos e preços</a></li>
+        <li><a href="planos.html#faq">Perguntas frequentes</a></li>
+        <li><a href="manual.html#ativar-licenca">Ativar minha licença</a></li>
+        <li><a href="manual.html#ativar-licenca">Recuperar minha chave</a></li>
+      </ul>
+    </details>
+    <details open>
+      <summary><a href="manual.html" class="ativo">Manual</a></summary>
+      <ul class="sublist">
+        <li><a href="manual.html#conhecendo-o-app">Conhecendo o app</a></li>
+        <li><a href="manual.html#como-usar">Como usar</a></li>
+        <li><a href="manual.html#requisitos">Requisitos</a></li>
+        <li><a href="manual.html#instalacao">Instalação</a></li>
+        <li><a href="manual.html#reinstalacao">Reinstalação</a></li>
+        <li><a href="manual.html#legislacao">Legislação</a></li>
+        <li><a href="manual.html#criando-mensagem">Criando sua mensagem</a></li>
+        <li><a href="manual.html#obter-contatos">Link dos contatos</a></li>
+        <li><a href="manual.html#ativar-licenca">Ativar ou recuperar a licença</a></li>
+        <li><a href="manual.html#intervalo-disparos">Intervalo entre disparos</a></li>
+        <li><a href="manual.html#intervalo-de-ate">Usar intervalo De/Até</a></li>
+        <li><a href="manual.html#enviando">Enviando</a></li>
+        <li><a href="manual.html#relatorio">Ler o relatório</a></li>
+        <li><a href="manual.html#envio-avulso">Envio avulso</a></li>
+        <li><a href="manual.html#possiveis-problemas">Possíveis problemas</a></li>
+        <li><a href="manual.html#faq">Perguntas frequentes</a></li>
+      </ul>
+    </details>
+    <a href="consulta-operadora.html">Consulta de operadora em lote</a>
+    <ul class="sublist">
+      <li><a href="consultas-executar.html">Consulte já</a></li>
+      <li><a href="consulta-operadora.html#como-funciona">Como funciona</a></li>
+      <li><a href="consulta-operadora.html#precos">Preços</a></li>
+      <li><a href="simulador-operadora.html#portabilidade">Portabilidade numérica</a></li>
+      <li><a href="consulta-operadora.html#faq">Perguntas frequentes</a></li>
+      <li><a href="sua-consulta.html">Sua consulta</a></li>
+      <li><a href="simulador-operadora.html#abr">Consulta oficial ABR</a></li>
+    </ul>
+    <a href="contador-caracteres.html" class="ativo">Contador de caracteres</a>
+    <ul class="sublist">
+      <li><a href="contador-caracteres.html#teste">Teste sua mensagem</a></li>
+      <li><a href="contador-caracteres.html#gsm7">Como funciona GSM-7</a></li>
+      <li><a href="contador-caracteres.html#ucs2">Como funciona UCS-2</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-label">Como o SMS funciona</div>
+    <details>
+      <summary><a href="como-sms-trafega.html">Como o SMS trafega</a></summary>
+      <ul class="sublist">
+      <li><a href="como-sms-trafega.html#smsc">SMSC</a></li>
+      <li><a href="como-sms-trafega.html#smpp-ss7">SMPP e SS7</a></li>
+    </ul>
+    </details>
+    <details>
+      <summary><a href="gsm7-ucs2.html">GSM-7 vs UCS-2</a></summary>
+      <ul class="sublist">
+      <li><a href="gsm7-ucs2.html#padrao-gsm7">O padrão GSM-7</a></li>
+      <li><a href="gsm7-ucs2.html#quando-ucs2">Quando UCS-2 ativa</a></li>
+    </ul>
+    </details>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-label">Comparação e uso</div>
+    <a href="rcs.html">RCS</a>
+    <a href="sms-vs-whatsapp.html">SMS vs WhatsApp vs RCS</a>
+    <details>
+      <summary><a href="legislacao-sms.html">SMS marketing e LGPD</a></summary>
+      <ul class="sublist">
+      <li><a href="legislacao-sms.html#opt-out">Opt-out</a></li>
+      <li><a href="legislacao-sms.html#bloqueio">Bloqueio na operadora</a></li>
+    </ul>
+    </details>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-label">Recursos externos</div>
+    <details>
+      <summary><a href="sms-avulso-operadoras.html">SMS avulso via operadoras</a></summary>
+      <ul class="sublist">
+      <li><a href="sms-avulso-operadoras.html#tarifas">Tarifas das operadoras</a></li>
+      <li><a href="sms-avulso-operadoras.html#plataformas">Plataformas web</a></li>
+      <li><a href="sms-avulso-operadoras.html#avulso-faq">Perguntas frequentes</a></li>
+    </ul>
+    </details>
+    <details>
+      <summary><a href="sms-massa-chipeiras.html">SMS em massa por chipeiras</a></summary>
+      <ul class="sublist">
+      <li><a href="sms-massa-chipeiras.html#o-que-e">O que é uma chipeira</a></li>
+      <li><a href="sms-massa-chipeiras.html#custo">Componentes do custo</a></li>
+      <li><a href="sms-massa-chipeiras.html#comprar">Onde comprar</a></li>
+      <li><a href="sms-massa-chipeiras.html#chipeira-faq">Perguntas frequentes</a></li>
+    </ul>
+    </details>
+  </div>
+
+  <div class="sidebar-scroll-hint"><span>↓</span></div>
+</div>
+
+<div class="main">
+
+<div class="hero">
+  <div class="wrap">
+    <div class="hop">Manual do App</div>
+    <h1>Manual do SMSMass</h1>
+    <p class="lede">Guia completo em uma página só, pensado para ficar disponível também dentro do próprio app. Use o índice abaixo para pular direto ao tópico que precisa.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="hop">Índice</div>
+    <ul style="columns:2;column-gap:32px;line-height:2;">
+      <li><a href="#conhecendo-o-app">Conhecendo o app</a></li>
+      <li><a href="#como-usar">Como usar</a></li>
+      <li><a href="#requisitos">Requisitos</a></li>
+      <li><a href="#instalacao">Instalação</a></li>
+      <li><a href="#reinstalacao">Reinstalação</a></li>
+      <li><a href="#legislacao">Legislação</a></li>
+      <li><a href="#criando-mensagem">Criando sua mensagem</a></li>
+      <li><a href="#obter-contatos">Link dos contatos</a></li>
+      <li><a href="#ativar-licenca">Como ativar a licença</a></li>
+      <li><a href="#intervalo-disparos">Intervalo entre disparos <span class="aviso-especial">⚠</span></a></li>
+      <li><a href="#intervalo-de-ate">Usar intervalo De/Até</a></li>
+      <li><a href="#enviando">Enviando</a></li>
+      <li><a href="#relatorio">Ler o relatório</a></li>
+      <li><a href="#envio-avulso">Envio avulso</a></li>
+      <li><a href="#possiveis-problemas">Possíveis problemas</a></li>
+      <li><a href="#faq">Perguntas frequentes</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="conhecendo-o-app">
+  <div class="wrap">
+    <div class="hop">Conhecendo o app</div>
+    <h2 style="font-size:1.25rem;">Um tour rápido pelas 3 telas do SMSMass</h2>
+    <p>Antes de entrar em cada passo em detalhe, veja abaixo o que cada botão e campo faz nas telas do app. Os números na imagem batem com a legenda ao lado.</p>
+
+    <div class="app-screen-row">
+      <div class="app-screen-col">
+        <div class="app-screen-wrap">
+          <img src="img-manual/app-tela-principal.png" alt="Tela principal do SMSMass, com os campos de licença, envio e contatos">
+          <div class="app-pin" style="top:19.9%;left:50%;">1</div>
+          <div class="app-pin" style="top:29.5%;left:50%;">2</div>
+          <div class="app-pin" style="top:37.4%;left:50%;">3</div>
+          <div class="app-pin" style="top:52.4%;left:50%;">4</div>
+          <div class="app-pin" style="top:64.7%;left:50%;">5</div>
+          <div class="app-pin" style="top:74.1%;left:50%;">6</div>
+          <div class="app-pin" style="top:84.4%;left:50%;">7</div>
+        </div>
+      </div>
+      <div class="app-screen-col">
+        <h3 style="font-family:'Fraunces',serif;font-size:1.05rem;">Tela principal</h3>
+        <p style="color:var(--slate);font-size:.88rem;">No topo da tela aparece a versão instalada do app (ex: SMSMass V242). No menu de três pontos (⋮) tem duas opções: <strong>Stop this application</strong>, que fecha o app, e <strong>About this application</strong>, que informa que o app foi desenvolvido com o MIT App Inventor.</p>
+        <ul class="app-legend">
+          <li><span class="app-legend-num">1</span><span><strong>Ativar licença</strong> — clique aqui e cole a chave de ativação que você recebeu na compra.</span></li>
+          <li><span class="app-legend-num">2</span><span><strong>Confira / Progresso / 00:00</strong> — se faltar alguma informação ao clicar em Enviar, os erros e o que precisa corrigir aparecem aqui. Ao lado, o cronômetro mostra o tempo decorrido desde o início do disparo e, ao final, o tempo total gasto para enviar as mensagens a todos os contatos marcados.</span></li>
+          <li><span class="app-legend-num">3</span><span><strong>Enviar SMS / Enviado X de Y / Parar</strong> — Enviar SMS dispara o envio em massa; Enviado X de Y mostra quantos já foram enviados do total; Parar suspende o envio a qualquer momento.</span></li>
+          <li><span class="app-legend-num">4</span><span><strong>Caixa de mensagem</strong> — digite aqui o texto do SMS, até 160 caracteres no padrão GSM-7. O app avisa se você passar de 160 caracteres. Use o <a href="contador-caracteres.html">contador de caracteres</a> pra testar a mensagem e adaptá-la ao GSM-7 antes de disparar.</span></li>
+          <li><span class="app-legend-num">5</span><span><strong>Contador de caracteres</strong> — mostra quantos caracteres da mensagem já foram usados.</span></li>
+          <li><span class="app-legend-num">6</span><span><strong>De: Primeiro / Até: Último / Ver</strong> — define qual intervalo de contatos da planilha entra no disparo.</span></li>
+          <li><span class="app-legend-num">7</span><span><strong>Primeiro e último contato carregado</strong> — confirma que a planilha foi lida certo, mostrando o primeiro e o último nome.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="app-screen-row">
+      <div class="app-screen-col">
+        <div class="app-screen-wrap">
+          <img src="img-manual/app-tela-contatos.png" alt="Tela de carregamento de contatos e envio avulso do SMSMass">
+          <div class="app-pin" style="top:29.0%;left:50%;">1</div>
+          <div class="app-pin" style="top:40.8%;left:50%;">2</div>
+          <div class="app-pin" style="top:52.6%;left:50%;">3</div>
+          <div class="app-pin" style="top:64.8%;left:50%;">4</div>
+          <div class="app-pin" style="top:75.3%;left:50%;">5</div>
+          <div class="app-pin" style="top:86.6%;left:50%;">6</div>
+        </div>
+      </div>
+      <div class="app-screen-col">
+        <h3 style="font-family:'Fraunces',serif;font-size:1.05rem;">Carregar contatos e envio avulso</h3>
+        <ul class="app-legend">
+          <li><span class="app-legend-num">1</span><span><strong>Tempo (s) / Mínimo / Máximo</strong> — define o intervalo de tempo entre cada SMS enviado. A partir da V268, o app já abre com o campo Mínimo preenchido em 31s; ajuste para mais se quiser um envio mais seguro.</span></li>
+          <li><span class="app-legend-num">2</span><span><strong>Cole o link aqui</strong> — cole aqui a URL da planilha com seus contatos. Aceita Google Sheets, e também <a href="#obter-contatos">links diretos do Dropbox ou GitHub</a>.</span></li>
+          <li><span class="app-legend-num">3</span><span><strong>Carregar contatos da web / Total de contatos carregados</strong> — clique aqui pra carregar os contatos a partir do link colado acima.</span></li>
+          <li><span class="app-legend-num">4</span><span><strong>Limpa tudo / Limpa mensagem / Limpa contatos e link</strong> — botões pra reiniciar cada parte do formulário, separadamente.</span></li>
+          <li><span class="app-legend-num">5</span><span><strong>Envio Avulso / Enviar Agora</strong> — envia um SMS pra um único número digitado na hora, sem precisar de planilha.</span></li>
+          <li><span class="app-legend-num">6</span><span><strong>Relatório do envio / Sair</strong> — abre o relatório da última campanha, ou fecha o app.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="app-screen-row">
+      <div class="app-screen-col">
+        <div class="app-screen-wrap">
+          <img src="img-manual/app-tela-relatorio.png" alt="Tela de relatório de envios do SMSMass">
+          <div class="app-pin" style="top:37.3%;left:50%;">1</div>
+          <div class="app-pin" style="top:73.7%;left:50%;">2</div>
+          <div class="app-pin" style="top:84.4%;left:50%;">3</div>
+        </div>
+      </div>
+      <div class="app-screen-col">
+        <h3 style="font-family:'Fraunces',serif;font-size:1.05rem;">Relatório de envios</h3>
+        <ul class="app-legend">
+          <li><span class="app-legend-num">1</span><span><strong>Área do relatório</strong> — lista cada SMS enviado, com número, texto, data e horário.</span></li>
+          <li><span class="app-legend-num">2</span><span><strong>Compartilhar o relatório / Limpar o relatório / Voltar</strong> — compartilha o relatório por outro app, apaga o histórico, ou volta pra tela principal.</span></li>
+          <li><span class="app-legend-num">3</span><span><strong>Ícones de atalho</strong> — suporte via WhatsApp, compartilhar o app, e-mail, site e manual, todos a um toque.</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="como-usar">
+  <div class="wrap">
+    <div class="hop">Como usar</div>
+    <h2 style="font-size:1.25rem;">Pra que tipo de mensagem o SMSMass serve</h2>
+    <p>O SMSMass é uma ferramenta neutra de disparo — o uso depende de você. Alguns exemplos comuns entre quem já usa:</p>
+    <ul class="plan-items" style="margin-top:12px;max-width:640px;">
+      <li><strong>Cobranças</strong> — lembrete de parcela em aberto, vencimento próximo, ou negociação de dívida.</li>
+      <li><strong>Alertas de órgãos públicos</strong> — comunicados oficiais, prazos, convocações e avisos de interesse coletivo.</li>
+      <li><strong>Pedidos de voto</strong> — campanhas eleitorais, de candidatos a cargos variados, dentro do período e das regras permitidas pela legislação eleitoral.</li>
+      <li><strong>Avisos gerais</strong> — mudança de endereço, horário de funcionamento, confirmação de agendamento, reagendamento.</li>
+      <li><strong>Ofertas e promoções</strong> — divulgação de produtos, condições especiais, datas comemorativas.</li>
+      <li><strong>Confirmação de números</strong> — validar se um número de celular está ativo e recebendo mensagens.</li>
+    </ul>
+    <p style="margin-top:14px;color:var(--slate);font-size:.9rem;">Vale sempre observar a <a href="legislacao-sms.html">legislação de SMS marketing e LGPD</a> aplicável ao seu tipo de envio.</p>
+  </div>
+</section>
+
+<section id="requisitos">
+  <div class="wrap">
+    <div class="hop">1</div>
+    <h2 style="font-size:1.25rem;">Requisitos</h2>
+    <ul>
+      <li>Aparelho com Android 5.0 (Lollipop) ou superior.</li>
+      <li>Chip de operadora ativo, com plano ou saldo disponível para envio de SMS — o app dispara pelo chip físico do celular, não pela internet.</li>
+      <li>Conexão com internet (Wi-Fi ou dados móveis), usada apenas para ativar a licença e para enviar os relatórios de disparo ao servidor. O envio do SMS em si não depende de internet.</li>
+      <li>Conta no Gmail.</li>
+      <li>Conta no Google Drive.</li>
+      <li>Planilha do Google Sheets com a lista de contatos.</li>
+    </ul>
+    <p style="color:var(--slate);font-size:.9rem;">O SMSMass não funciona em iPhone. Isso não é uma limitação do app. O SMSMass usa uma função exclusiva do sistema Android para enviar SMS diretamente pelo chip. O iOS não concede esse tipo de acesso a nenhum aplicativo, de nenhum desenvolvedor. É uma restrição da própria Apple.</p>
+  </div>
+</section>
+
+<section id="instalacao">
+  <div class="wrap">
+    <div class="hop">2</div>
+    <h2 style="font-size:1.25rem;">Instalação</h2>
+    <p>Clique no app SMSMass para iniciar a instalação. Durante a instalação, o Android vai pedir:</p>
+    <ol>
+      <li>Permissão para instalar. Clique em Permitir.</li>
+      <li>Permissão para o Play Protect analisar o app. Permitir. Em alguns celulares, devido à diferença de fabricantes, o Play Protect apresenta a frase "Ver detalhes" — clique aí e autorize a análise. Sempre vai passar, pois o SMSMass não contém vírus.</li>
+      <li>Pergunta se quer instalar: responda Sim.</li>
+      <li>Clique em Abrir. Nos usos seguintes, depois de fechar o app, abra pela interface do celular, clicando no ícone dele.</li>
+      <li>Se for a versão Trial, a licença já vem preenchida no topo da tela. Se for outra versão, coloque o código recebido por e-mail no topo da tela e clique em Ativar.</li>
+    </ol>
+    <p style="color:var(--slate);font-size:.9rem;">Observação: em alguns aparelhos Android a instalação pode parecer travada, demorando bem mais do que o esperado. Nesse caso, cancele a instalação e tente instalar novamente.</p>
+  </div>
+</section>
+
+<section id="reinstalacao">
+  <div class="wrap">
+    <div class="hop">3</div>
+    <h2 style="font-size:1.25rem;">Reinstalação</h2>
+    <p>Nesse caso, remova completamente o app — em Configurações do celular ou desinstalando pela interface. Sobrescrever a instalação anterior não funciona. Após fazer isso, reinstale como na Instalação descrita.</p>
+  </div>
+</section>
+
+<section id="legislacao">
+  <div class="wrap">
+    <div class="hop">4</div>
+    <h2 style="font-size:1.25rem;">Legislação</h2>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;" id="legislacao-base-legal">Base legal (LGPD)</h3>
+    <p>A Lei Geral de Proteção de Dados (Lei 13.709/2018) não proíbe SMS marketing, mas exige uma base legal para o uso do número de telefone — geralmente consentimento do titular ou legítimo interesse, quando há uma relação comercial prévia (por exemplo, um cliente que já contratou um produto consignado). Números obtidos de bases compradas sem rastreabilidade de origem são um risco jurídico maior, porque não há como comprovar a base legal se houver reclamação.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;" id="legislacao-eleicoes">Eleições</h3>
+    <p>Se a intenção é usar o SMSMass para propaganda político-eleitoral, as regras são diferentes das do uso comercial. A propaganda eleitoral na internet só é permitida a partir de 16 de agosto — antes disso vale o período de pré-campanha, com restrições a pedido explícito de voto.</p>
+    <p>O disparo em massa de mensagens de conteúdo político-eleitoral é proibido em qualquer canal, incluindo SMS, WhatsApp e Telegram — mesmo usando uma base de contatos própria. Uma base comercial usada para outra finalidade (por exemplo, uma lista de clientes de crédito consignado) não pode ser reaproveitada para propaganda eleitoral sem consentimento específico para essa finalidade. A base legal para isso está na Resolução TSE 23.610, que exige consentimento específico, expresso e destacado para o tratamento desse tipo de dado.</p>
+    <p>Conteúdo gerado por inteligência artificial precisa exibir aviso identificando a tecnologia usada, e há uma janela de 72h antes até 24h depois do pleito em que fica vedado republicar conteúdo sintético com voz ou imagem de candidatos.</p>
+    <p style="color:var(--slate);font-size:.9rem;">Na prática: o SMSMass é uma ferramenta de disparo em massa, o que é estruturalmente incompatível com propaganda político-eleitoral, mesmo usando uma lista de contatos própria — diferente do uso comercial (INSS, consignado, vendas em geral), que não tem essa restrição.</p>
+  </div>
+</section>
+
+<section id="criando-mensagem">
+  <div class="wrap">
+    <div class="hop">5</div>
+    <h2 style="font-size:1.25rem;">Criando sua mensagem</h2>
+    <p>A mensagem pode ter até 160 caracteres — esse é o limite de um SMS único usando codificação padrão (GSM-7). Ultrapassar esse limite não trava o envio, mas gera cobrança de mais de um SMS por disparo. Use o <a href="contador-caracteres.html">Contador de caracteres</a> para conferir em tempo real quantos SMS sua mensagem vai gerar antes de sair disparando — ou teste direto aqui embaixo:</p>
+
+    <div class="wrap counter-box" id="testeManual" style="margin-top:20px;">
+      <textarea id="msgManual" placeholder="Digite ou cole sua mensagem aqui..." aria-label="Texto da mensagem SMS"></textarea>
+      <div class="counter-stats">
+        <div class="stat"><div class="num" id="charCountManual">0</div><div class="label">Caracteres</div></div>
+        <div class="stat"><div class="num" id="encodingManual">GSM-7</div><div class="label">Codificação</div></div>
+        <div class="stat"><div class="num" id="limitPerSmsManual">160</div><div class="label">Limite por SMS</div></div>
+        <div class="stat"><div class="num" id="smsCountManual">1</div><div class="label">SMS cobrados</div></div>
+      </div>
+      <div id="warningManual" style="margin-top:18px;"></div>
+      <div class="trace" id="traceManual" aria-hidden="true" style="margin-top:14px;"></div>
+    </div>
+
+    <p style="margin-top:22px;">A mensagem pode ser mesclada com os dados da planilha de contatos: o SMSMass substitui automaticamente variáveis como {Texto 1} e {Texto 2} pelo conteúdo de cada linha da planilha, uma por contato, gerando uma mensagem personalizada para cada pessoa em vez de um texto único igual para todos.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Exemplos de mensagem</h3>
+    <p>1 — {Texto 1} essa mensagem foi enviada pelo app SMSMass e você pode adquiri-lo por apenas {Texto 2} para enviar mensagens ilimitadas.</p>
+    <p>2 — Por apenas {Texto 2} eu adquiri o melhor app de envio de mensagens pelo celular. {Texto 1}, conquiste mais clientes, amplie suas vendas. Visite nosso site www.exemplo.com.br</p>
+    <p>3 — As colunas Texto 1 e Texto 2 não precisam conter, literalmente, um nome e um valor. Podem representar qualquer texto — use sua imaginação para customizar suas mensagens conforme sua campanha.</p>
+    <p>4 — {Texto 1}, você tem {Texto 2} disponível para saque no seu benefício. Consulte sem compromisso, sem alterar sua renda.</p>
+    <p>5 — Olá {Texto 1}! Sua proposta de portabilidade consignado está pronta, com economia de até {Texto 2} por mês. Fale com a gente.</p>
+    <p>6 — {Texto 1}, últimas vagas! Garanta já com {Texto 2} de desconto. Oferta válida só hoje.</p>
+    <p>7 — {Texto 1}, seu FGTS saque-aniversário libera até {Texto 2} disponível para retirada. Consulte agora, sem custo.</p>
+  </div>
+</section>
+
+<section id="obter-contatos">
+  <div class="wrap">
+    <div class="hop">6</div>
+    <h2 style="font-size:1.25rem;">Link dos contatos</h2>
+    <p>O SMSMass carrega os contatos a partir de um link. O mais comum, e o único que garantimos que funciona em qualquer aparelho Android, é o Google Sheets. A partir da versão V262, o app também aceita links diretos de outros serviços — mas cada um tem uma particularidade que vale a pena conhecer antes de usar.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Comece pelo modelo pronto</h3>
+    <ol>
+      <li>Baixe o <a href="modelo-planilha-contatos.xlsx">modelo da planilha</a>.</li>
+      <li>Carregue seus contatos nele, seguindo as instruções da segunda aba do arquivo.</li>
+    </ol>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Prepare a planilha</h3>
+    <p>Acesse sheets.google.com e crie uma planilha nova (ou faça upload do modelo baixado acima). A planilha deve ter 3 colunas, com a primeira linha contendo exatamente estes cabeçalhos:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Telefone</th><th>Texto 1</th><th>Texto 2</th></tr>
+    </table></div>
+    <p>A partir da segunda linha, insira um contato por linha. As colunas Texto 1 e Texto 2 podem conter qualquer texto — nome, valor, ou o que você quiser usar na mensagem. Exemplo:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Telefone</th><th>Texto 1</th><th>Texto 2</th></tr>
+      <tr><td class="mono">31987654321</td><td>Maria</td><td class="mono">1250,00</td></tr>
+      <tr><td class="mono">31912345678</td><td>João</td><td class="mono">890,50</td></tr>
+    </table></div>
+    <p style="color:var(--slate);font-size:.9rem;">O telefone deve incluir DDD, sem espaços, traços ou parênteses. Nas colunas Texto 1 e Texto 2, o valor pode ficar com vírgula ou ponto como separador decimal — o app aceita os dois. Se você estiver usando outro serviço em vez do Google Sheets, não precisa se preocupar com o separador de colunas do arquivo (tabulação, ponto e vírgula ou vírgula) — o app detecta automaticamente qual foi usado.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Compartilhe a planilha</h3>
+    <p>No canto superior direito do Google Sheets, clique em Compartilhar, depois em Alterar para qualquer pessoa com o link. Deixe a permissão como Leitor (o app não precisa editar, só ler). Feche essa janela — não precisa copiar o link que aparece ali, o link que o SMSMass usa é diferente.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Gere o link</h3>
+    <p>Copie o endereço que aparece na barra do navegador enquanto a planilha estiver aberta. Ele parece com isso:</p>
+    <p class="mono" style="background:var(--paper-dim);padding:12px;border-radius:4px;font-size:.85rem;">https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz1234567890/edit#gid=0</p>
+    <p>Cole esse endereço direto no campo do app. A partir da versão V168, o SMSMass corrige esse link sozinho: não importa se o que foi colado é o link de edição (com <span class="mono">/edit?gid=...</span>) ou o link de compartilhamento gerado pelo botão Compartilhar — o app identifica o ID da planilha e o gid da aba automaticamente e monta por conta própria a URL de exportação no formato correto (<span class="mono">/export?format=tsv&amp;gid=...</span>). Você não precisa editar o link manualmente antes de colar.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Usando outro serviço em vez do Google Sheets</h3>
+    <p style="color:var(--slate);">Isso é opcional — se o Google Sheets já resolve pra você, pode pular esta parte. Serve pra quem prefere manter os contatos em outro lugar, ou tem seu próprio servidor.</p>
+
+    <p><strong>Dropbox</strong> — funciona, mas exige um ajuste manual no link:</p>
+    <ol>
+      <li>Sobe o arquivo .csv no Dropbox.</li>
+      <li>Clica em Compartilhar → Copiar link. Vai vir algo assim, terminando em <span class="mono">dl=0</span>:<br>
+        <span class="mono" style="background:var(--paper-dim);padding:8px 10px;border-radius:4px;font-size:.82rem;display:inline-block;margin-top:6px;">https://www.dropbox.com/scl/fi/abc123/contatos.csv?rlkey=xyz&amp;dl=0</span>
+      </li>
+      <li>Troca o final do link de <span class="mono">dl=0</span> para <span class="mono">dl=1</span>. Sem essa troca, o link abre a tela de visualização do Dropbox em vez do arquivo, e o app não consegue ler.</li>
+      <li>Cola esse link (já com <span class="mono">dl=1</span>) no app.</li>
+    </ol>
+
+    <p><strong>GitHub</strong> — funciona bem, e não precisa editar nada:</p>
+    <ol>
+      <li>Sobe o .csv num repositório (pode ser privado ou público).</li>
+      <li>Abre o arquivo no GitHub e clica no botão <strong>Raw</strong>.</li>
+      <li>Copia a URL que abre — já é o link direto, sem precisar editar nada.</li>
+    </ol>
+
+    <p style="color:var(--slate);font-size:.9rem;"><strong>Mega:</strong> não recomendamos. O Mega não oferece um link direto de arquivo — mesmo os links no formato <span class="mono">mega.nz/file/...</span> sempre abrem a interface deles no navegador, sem entregar o arquivo puro, e por isso o app não consegue ler.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Confira a leitura no app</h3>
+    <p>Cole o link no campo <strong>Cole o link aqui</strong> e, em seguida, toque em <strong>Carregar contatos da web</strong>. O app vai mostrar quantos contatos foram lidos. Se aparecer zero, revise: se a primeira linha tem os cabeçalhos exatos (Telefone, Texto 1, Texto 2), se o arquivo está com acesso público (qualquer pessoa com o link pode ler), e se não há linhas vazias entre os contatos.</p>
+      <h3 style="font-size:1.05rem;margin-top:28px;" id="contatos-agenda">Contatos da agenda do celular (a partir da V267)</h3>
+    <p>Se os números já estão salvos no seu celular, não precisa de planilha. Na tela principal, toque em 📇 Carregar da agenda do celular. Abre a tela da agenda, com duas formas de escolher os contatos:</p>
+    <ul>
+      <li>👤 Escolher um contato (rápido) — abre a lista de contatos do próprio Android, na hora, com a busca por nome dele. Cada contato escolhido entra na lista do SMSMass já marcado. Toque de novo no botão para cada contato. É o jeito mais prático para mandar para 3, 4 ou 5 pessoas, mesmo com uma agenda grande.</li>
+      <li>Carregar contatos da agenda — lê a agenda inteira de uma vez. Com muitos contatos pode demorar um pouco; o app mostra "Aguarde carregar a agenda" enquanto lê. Depois, use o campo de busca (nome, parte do nome ou número), 🔍 Procurar e os botões Marcar encontrados e Desmarcar encontrados para escolher vários de uma vez. Números repetidos aparecem uma vez só.</li>
+    </ul>
+    <p>Dá para misturar os dois: os contatos escolhidos pelo modo rápido continuam marcados se você carregar a agenda inteira depois. Para marcar ou desmarcar um contato, toque nele na lista. A tela mostra até 300 contatos por vez; use Procurar para achar os outros. No final, toque em Usar marcados para voltar à tela principal com os contatos carregados.</p>
+    <p style="color:var(--slate);font-size:.9rem;">Importante: nessa modalidade não é possível customização. A mensagem precisa ser genérica, sem {Texto 1} e {Texto 2}, porque os contatos da agenda não têm essas colunas. Se quiser personalizar com nome ou valor, use a planilha.</p>
+  </div>
+</section>
+
+<section id="ativar-licenca">
+  <div class="wrap">
+    <div class="hop">7</div>
+    <h2 style="font-size:1.25rem;">Como ativar a licença</h2>
+    <p style="color:var(--slate);">Usar a chave TRIAL para os 5 SMS gratuitos, ou a chave recebida por e-mail após a compra no Kiwify. Passo a passo em preparação.</p>
+
+    <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--line);max-width:480px;">
+      <div class="hop">Perdeu a chave?</div>
+      <h3 style="font-size:1.05rem;">Recuperar minha chave de ativação</h3>
+      <p style="color:var(--slate);font-size:.9rem;">Informe o nome completo e o CPF ou CNPJ usados na compra. Por segurança, os dois precisam bater com o que consta no seu cadastro.</p>
+
+      <form id="formRecuperarLicenca" style="margin-top:16px;display:flex;flex-direction:column;gap:16px;">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:.9rem;font-weight:600;">
+          Nome completo usado na compra
+          <input type="text" id="campoNomeLicenca" required style="padding:10px 12px;border:1px solid var(--line);border-radius:4px;font-size:.95rem;font-family:inherit;">
+        </label>
+
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:.9rem;font-weight:600;">
+          CPF ou CNPJ usado na compra
+          <input type="text" id="campoCpfLicenca" required style="padding:10px 12px;border:1px solid var(--line);border-radius:4px;font-size:.95rem;font-family:inherit;">
+        </label>
+
+        <button type="submit" class="btn" style="border:none;cursor:pointer;">Buscar minha chave</button>
+      </form>
+
+      <p id="statusRecuperarLicenca" style="margin-top:14px;color:var(--slate);font-size:.9rem;"></p>
+    </div>
+  </div>
+</section>
+
+<script>
+document.getElementById('formRecuperarLicenca').addEventListener('submit', function(e){
+  e.preventDefault();
+  var nome = document.getElementById('campoNomeLicenca').value.trim();
+  var cpf = document.getElementById('campoCpfLicenca').value.trim();
+  var status = document.getElementById('statusRecuperarLicenca');
+  var botao = document.querySelector('#formRecuperarLicenca button[type="submit"]');
+
+  botao.disabled = true;
+  status.textContent = 'Buscando...';
+
+  fetch('https://script.google.com/macros/s/AKfycbytv1JNCpDJhwXS4nEisHFTt9yirSjZvsafXbZyc2fBztNrbDFuu7DsZe8w4NUKe5D3/exec', {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({tipo: 'recuperar_licenca', nome: nome, cpf: cpf})
+  })
+  .then(function(resp){ return resp.json(); })
+  .then(function(json){
+    botao.disabled = false;
+    if (json.status === 'sucesso') {
+      var sms = (json.sms_disponivel === -1) ? 'ilimitado' : json.sms_disponivel;
+      status.textContent = 'Encontramos! Sua chave: ' + json.chave + ' — Plano: ' + json.plano + ' — Situação: ' + json.situacao + ' — SMS disponíveis: ' + sms + '. Cole essa chave no app, na tela de ativação de licença.';
+    } else {
+      status.textContent = 'Erro: ' + (json.mensagem || 'não foi possível localizar sua licença.');
+    }
+  })
+  .catch(function(){
+    botao.disabled = false;
+    status.textContent = 'Não foi possível buscar agora. Tente novamente em instantes.';
+  });
+});
+</script>
+
+<section id="intervalo-disparos">
+  <div class="wrap">
+    <div class="hop">8</div>
+    <h2 style="font-size:1.25rem;">Intervalo entre disparos <span class="aviso-especial">⚠ Cuidado especial!</span></h2>
+    <p>Configurar o intervalo errado é a causa mais comum de bloqueio de chip. Operadoras como Vivo, Claro e TIM monitoram o volume e a frequência de disparos saindo de um mesmo número — não é preciso nenhuma denúncia de destinatário para o sistema antifraude identificar um padrão de disparo em massa e bloquear o chip.</p>
+    <p>Recomendamos um tempo mínimo de pelo menos <strong>31 segundos</strong> entre cada SMS — é o valor com que o app já abre, a partir da V268. Abaixo disso, o risco de bloqueio é praticamente certo.</p>
+    <p>O tempo máximo define o teto da faixa: junto com o mínimo, ele forma o intervalo de onde o app sorteia, a cada envio, um tempo de espera diferente — de forma aleatória, e não um valor fixo repetido. Isso é importante porque um intervalo sempre igual (por exemplo, sempre exatos 30 segundos) cria um padrão fácil de identificar pelos sistemas das operadoras. Um intervalo aleatório dentro de uma faixa imita melhor o comportamento humano e reduz esse risco.</p>
+    <p>Quanto maior a faixa (mínimo e máximo mais altos), mais seguro o envio — mas menos SMS por hora são enviados. É uma troca entre velocidade e segurança.</p>
+    <div class="table-scroll"><table>
+      <tr><th>Tempo mínimo</th><th>Tempo máximo</th><th>Tempo médio</th><th>SMS por hora (aprox.)</th><th>Risco</th></tr>
+      <tr><td>31s</td><td>60s</td><td>~45s</td><td>~80</td><td>Alto risco</td></tr>
+      <tr><td>60s</td><td>120s</td><td>~90s</td><td>~40</td><td>Risco moderado</td></tr>
+      <tr><td>120s</td><td>180s</td><td>~150s</td><td>~24</td><td>Risco baixo</td></tr>
+      <tr><td>180s</td><td>240s</td><td>~210s</td><td>~17</td><td>Seguro</td></tr>
+      <tr><td>220s</td><td>280s</td><td>~250s</td><td>~14</td><td>Muito seguro — faixa usada em produção</td></tr>
+    </table></div>
+    <p style="color:var(--slate);font-size:.9rem;">Para campanhas grandes, distribuir os envios ao longo do dia (por exemplo, em horário comercial, das 10h às 17h) em vez de tentar enviar tudo de uma vez também reduz o risco de bloqueio.</p>
+    <div class="notice"><strong>Horário de disparo:</strong> para cobrança e consignado, mantenha o envio entre 8h e 20h, em dias úteis — é a janela usada como referência pela legislação de cobrança no Brasil, e evita mensagem chegando de madrugada ou no fim de semana, o que aumenta a taxa de denúncia e o risco de bloqueio.</div>
+  </div>
+</section>
+
+<section id="intervalo-de-ate">
+  <div class="wrap">
+    <div class="hop">9</div>
+    <h2 style="font-size:1.25rem;">Usar intervalo De/Até</h2>
+    <p>Os campos De e Até permitem enviar apenas uma parte da lista de contatos da planilha, em vez de todos de uma vez. Isso é útil para dividir uma lista grande em lotes, ou para retomar um envio que parou no meio sem repetir contatos que já receberam a mensagem.</p>
+    <p>Exemplo: imagine uma planilha com 13.595 contatos (linhas de contato 1 até 13.595, sem contar o cabeçalho). Você pode dividir o envio em lotes assim:</p>
+    <div class="table-scroll"><table>
+      <tr><th>Lote</th><th>De</th><th>Até</th></tr>
+      <tr><td>1</td><td>1</td><td>3000</td></tr>
+      <tr><td>2</td><td>3001</td><td>6000</td></tr>
+      <tr><td>3</td><td>6001</td><td>9000</td></tr>
+      <tr><td>4</td><td>9001</td><td>12000</td></tr>
+      <tr><td>5</td><td>12001</td><td>13595</td></tr>
+    </table></div>
+    <p>Cada lote é um envio separado. Você espera o lote terminar (ou usa Parar, se precisar interromper), confere no relatório quantos foram enviados, e inicia o próximo lote alterando apenas os campos De e Até.</p>
+    <p style="color:var(--slate);font-size:.9rem;">Isso também é útil se um envio for interrompido no meio — por exemplo, se parou no contato 4.200 de um lote De 3001 até 6000, o próximo envio pode começar De 4201 até 6000, sem reenviar para quem já recebeu.</p>
+  </div>
+</section>
+
+<section id="enviando">
+  <div class="wrap">
+    <div class="hop">10</div>
+    <h2 style="font-size:1.25rem;">Enviando</h2>
+    <p>Durante o envio, a tela mostra o tempo decorrido, quantos contatos já foram processados do total (por exemplo, "45 de 100") e o andamento do disparo em tempo real.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Mantenha o app em foco</h3>
+    <p>O SMSMass precisa ficar aberto e em foco durante todo o envio — não deixe a tela apagar.</p>
+    <p>Se a tela do app ficar reduzida a uma miniatura — por exemplo, ao abrir a lista de apps recentes (aba) sem sair de fato do SMSMass — o relógio e o contador de mensagens enviadas ficam parados na tela, mas o envio continua acontecendo por trás. Ao voltar para o app em tela cheia, o tempo decorrido e a contagem de mensagens são atualizados de uma vez, refletindo o que já foi enviado enquanto a tela estava reduzida. Já se o foco for perdido totalmente — ao trocar de fato para outro aplicativo — o envio para.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Dicas para envios longos</h3>
+    <ul>
+      <li>Use o app em modo de tela dividida (split screen), se o aparelho tiver esse recurso — ajuda a reduzir o aquecimento do celular.</li>
+      <li>Diminua o brilho da tela.</li>
+      <li>Deixe o carregador conectado durante envios longos, para não ficar sem bateria no meio do disparo.</li>
+    </ul>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Se muitos contatos falharem de uma vez</h3>
+    <p>Uma falha geral — muitos contatos seguidos sem entrega — pode ser sinal de bloqueio pela operadora do chip, e não necessariamente um problema do app. Isso costuma acontecer principalmente com chips Claro. Se notar esse padrão, revise o <a href="#intervalo-disparos">intervalo entre disparos</a> e considere aumentar o tempo mínimo e máximo.</p>
+  </div>
+</section>
+
+<section id="relatorio">
+  <div class="wrap">
+    <div class="hop">11</div>
+    <h2 style="font-size:1.25rem;">Ler o relatório</h2>
+    <p>A partir da versão 271, o relatório de cada envio é salvo automaticamente na pasta Download do celular, no arquivo relatorio_ seguido da data e hora de início (por exemplo, relatorio_09102026_162800.txt). Ele é atualizado a cada 20 mensagens, ao tocar em Parar, ao terminar e quando o envio para por limite do plano. Cada linha traz o telefone, o nome e a data e hora do envio.</p>
+    <p style="color:var(--slate);">Mais detalhes sobre a interpretação do relatório de envios, mensagens de sucesso e mensagens falhadas. Em preparação.</p>
+  </div>
+</section>
+
+<section id="envio-avulso">
+  <div class="wrap">
+    <div class="hop">12</div>
+    <h2 style="font-size:1.25rem;">Envio avulso</h2>
+    <p>Se você precisa mandar SMS para um contato só (ou poucos), tem duas formas: pelo próprio SMSMass, ou direto pela operadora.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Pelo SMSMass</h3>
+    <p>O app foi feito para disparo em massa, mas o mesmo processo funciona para um único contato. Não existe um modo separado para isso: basta preparar a planilha do Google Sheets com apenas uma linha de contato, seguindo o mesmo modelo com as colunas Telefone, Texto 1 e Texto 2. Cole o link no app, escreva a mensagem e clique em Enviar — funciona igual para 1 contato ou para milhares.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Pelas operadoras</h3>
+    <p>Vivo, Claro, TIM e Oi também permitem enviar um SMS avulso direto do celular ou por serviços web, com tarifa cobrada por mensagem fora do plano — útil quando é só uma mensagem pontual e não vale a pena montar uma planilha. Detalhes de como cada operadora funciona e as tarifas praticadas estão em <a href="sms-avulso-operadoras.html">Envio de SMS avulso via operadoras</a>.</p>
+  </div>
+</section>
+
+<section id="possiveis-problemas">
+  <div class="wrap">
+    <div class="hop">13</div>
+    <h2 style="font-size:1.25rem;">Possíveis problemas</h2>
+    <p>Situações que podem interromper um envio longo, o que costuma causar cada uma e como resolver sem repetir mensagens para quem já recebeu.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">"Limite do plano atingido", mas ainda há saldo</h3>
+    <p>A cada 20 mensagens enviadas o app confere o saldo da licença com o servidor. Se nesse momento a internet do celular cair, ou o servidor tiver uma falha passageira, a resposta chega incompleta. Nas versões anteriores à 271 o app interpretava essa resposta incompleta como fim do saldo e parava o envio com a mensagem "Limite do plano atingido!".</p>
+    <ul>
+      <li>Atualize o app para a versão 271 ou mais nova. A partir dela, uma falha de conferência não interrompe mais o envio: o app segue com o saldo que já tinha e confere de novo nos próximos 20 envios.</li>
+      <li>Se o seu plano ainda tem saldo, basta retomar o envio pelos campos De e Até (veja abaixo como calcular).</li>
+      <li>Se a mensagem continuar aparecendo com saldo disponível, fale com o suporte pelo WhatsApp.</li>
+    </ul>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">O envio parou depois de horas com a tela apagada</h3>
+    <p>Com a tela desligada por muito tempo, o Android entra em modo de economia de bateria e pode cortar a internet ou pausar aplicativos. Isso afeta principalmente envios longos, de várias horas, e piora com a bateria baixa.</p>
+    <ul>
+      <li>Mantenha a tela ligada durante o envio, com o brilho no mínimo.</li>
+      <li>Deixe o carregador conectado.</li>
+      <li>Desative a otimização de bateria para o SMSMass. O caminho varia por marca; em geral fica em Configurações, Aplicativos, SMSMass, Bateria, opção Sem restrições (ou Não otimizar).</li>
+      <li>Veja também as dicas em <a href="#enviando">Enviando</a>.</li>
+    </ul>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Internet instável ou sem dados móveis</h3>
+    <p>O SMS sai pelo chip, mas o app usa a internet para conferir a licença e o saldo. Com sinal fraco, dados móveis desligados ou pacote de dados esgotado, as conferências falham. Prefira deixar o celular no Wi-Fi durante envios longos.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Como retomar sem repetir contatos</h3>
+    <p>Quando um envio para no meio, a tela mostra quantos contatos ficaram faltando ("restantes"). Para continuar de onde parou, mantenha o Até e calcule o novo De assim:</p>
+    <p style="margin-left:16px;">novo De = Até − restantes + 1</p>
+    <p>Exemplo: um envio De 72 até 1069 parou com 658 restantes. O novo De é 1069 − 658 + 1 = 412. Configure De 412 e Até 1069 e envie de novo. Mais detalhes em <a href="#intervalo-de-ate">Usar intervalo De/Até</a>.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Não encontro o relatório do envio</h3>
+    <p>A partir da versão 271, o relatório é salvo automaticamente na pasta Download do celular, num arquivo chamado relatorio_ seguido da data e hora de início do envio (por exemplo, relatorio_09102026_162800.txt). O arquivo é atualizado a cada 20 mensagens, ao tocar em Parar, ao terminar e também quando o envio para por limite do plano. Cada envio gera o seu próprio arquivo.</p>
+
+    <h3 style="font-size:1.05rem;margin-top:20px;">Muitos contatos seguidos sem entrega</h3>
+    <p>Pode ser bloqueio pela operadora do chip, e não um problema do app. Revise o <a href="#intervalo-disparos">intervalo entre disparos</a> e veja a explicação em <a href="#enviando">Enviando</a>.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="hop">14</div>
+    <h2 style="font-size:1.25rem;">Perguntas frequentes</h2>
+    <p style="color:var(--slate);">Dúvidas mais comuns sobre operação, licença, disparo e relatório. Em preparação.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">SMSMass — ferramentas para correspondentes bancários que disparam SMS em massa. CNPJ 22.308.290/0001-78 · <a href="https://wa.me/5531991271321" target="_blank" rel="noopener">WhatsApp</a></div>
+</footer>
+
+</div><!-- /main -->
+
+<script>
+const GSM7 = "@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞ\u001bÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà";
+
+function isGSM7(text){
+  for(const ch of text){
+    if(GSM7.indexOf(ch) === -1) return false;
+  }
+  return true;
+}
+
+function numeroExtenso(n){
+  const nomes = ['zero','um','dois','três','quatro','cinco','seis','sete','oito','nove','dez','onze','doze','treze','quatorze','quinze','dezesseis','dezessete','dezoito','dezenove','vinte'];
+  return nomes[n] || n;
+}
+
+function updateManual(){
+  const text = document.getElementById('msgManual').value;
+  const len = text.length;
+  const gsm7 = isGSM7(text);
+  const limitSingle = gsm7 ? 160 : 70;
+  const limitMulti = gsm7 ? 153 : 67;
+
+  let smsCount;
+  if(len === 0){ smsCount = 0; }
+  else if(len <= limitSingle){ smsCount = 1; }
+  else { smsCount = Math.ceil(len / limitMulti); }
+
+  document.getElementById('charCountManual').textContent = len;
+  document.getElementById('encodingManual').textContent = gsm7 ? 'GSM-7' : 'UCS-2';
+  document.getElementById('limitPerSmsManual').textContent = limitSingle;
+  document.getElementById('smsCountManual').textContent = smsCount;
+
+  const trace = document.getElementById('traceManual');
+  trace.innerHTML = '';
+  const blocks = Math.min(smsCount, 20);
+  for(let i=0;i<blocks;i++){
+    const d = document.createElement('div');
+    d.className = 'seg filled';
+    trace.appendChild(d);
+  }
+  if(smsCount > 20){
+    const d = document.createElement('div');
+    d.className = 'seg over';
+    d.title = '+' + (smsCount-20) + ' segmentos';
+    trace.appendChild(d);
+  }
+
+  const warning = document.getElementById('warningManual');
+  if(len === 0){
+    warning.innerHTML = '';
+  } else if(smsCount === 1 && gsm7){
+    warning.innerHTML = '<div class="notice">Tudo certo: sua mensagem cabe em 1 SMS (codificação GSM-7). Será cobrado apenas 1 envio por contato.</div>';
+  } else if(smsCount === 1 && !gsm7){
+    warning.innerHTML = '<div class="notice">Atenção: sua mensagem cabe em 1 SMS, mas usa codificação UCS-2 (por causa de acento, ç ou emoji), que reduz o limite de 160 para 70 caracteres. Ainda dentro do limite — 1 envio por contato.</div>';
+  } else if(smsCount > 1 && !gsm7){
+    const ext = numeroExtenso(smsCount);
+    warning.innerHTML = '<div class="notice"><p style="margin:0 0 10px;">Atenção!</p><p style="margin:0 0 10px;">Remova acentos, ç ou emojis.</p><p style="margin:0 0 10px;">Ela será dividida em ' + smsCount + '(' + ext + ') partes, e para cada contato, serão enviados ' + smsCount + '(' + ext + ') SMS, impactando seu custo.</p><p style="margin:0;">Sua mensagem contém acento, ç ou emoji, o que ativa a codificação UCS-2 e reduz o limite de 160 para 70 caracteres por SMS.</p></div>';
+  } else {
+    const ext = numeroExtenso(smsCount);
+    warning.innerHTML = '<div class="notice"><p style="margin:0 0 10px;">Atenção!</p><p style="margin:0;">Sua mensagem ultrapassa 160 caracteres. Ela será dividida em ' + smsCount + '(' + ext + ') partes, e para cada contato, serão enviados ' + smsCount + '(' + ext + ') SMS, impactando seu custo.</p></div>';
+  }
+}
+
+document.getElementById('msgManual').addEventListener('input', updateManual);
+updateManual();
+</script>
+<script>
+// Search index: title, description, url
+const searchIndex = [
+  {t:"Home",d:"Página inicial do SMSMass",u:"index.html"},
+  {t:"Planos",d:"Trial, 2000, 5000 SMS ou ilimitado",u:"planos.html"},
+  {t:"Loja",d:"Todos os produtos: planos de SMS, consultas e afiliados",u:"loja.html"},
+  {t:"Consultas e Afiliados",d:"Consulta de operadora e portabilidade em lote",u:"consultas.html"},
+  {t:"Programa de Afiliados",d:"Ganhe comissão indicando o SMSMass",u:"afiliados.html"},
+  {t:"Contador de caracteres SMS",d:"GSM-7, UCS-2 e cálculo de segmentos",u:"contador-caracteres.html"},
+  {t:"Simulador de operadora",d:"Consulta oficial ABR e portabilidade",u:"simulador-operadora.html"},
+  {t:"Consulta de operadora em lote",d:"Recurso pago do site: consulta a operadora atual de toda a planilha",u:"consulta-operadora.html"},
+  {t:"Rodar consulta de operadora",d:"Consulte já: envie o CSV e receba o resultado por e-mail",u:"consultas-executar.html"},
+  {t:"Sua consulta",d:"Já é cliente? Rode sua consulta com os créditos que restarem",u:"sua-consulta.html"},
+  {t:"Como o SMS trafega",d:"SMSC, SMPP e SS7",u:"como-sms-trafega.html"},
+  {t:"GSM-7 vs UCS-2",d:"Por que o SMS tem limite de 160 caracteres",u:"gsm7-ucs2.html"},
+  {t:"SMS vs WhatsApp vs RCS",d:"Comparação para cobrança e consignado",u:"sms-vs-whatsapp.html"},
+  {t:"RCS",d:"Cobertura no Brasil e por que o SMSMass ainda nao envia por RCS",u:"rcs.html"},
+  {t:"SMS marketing e LGPD",d:"Opt-out e bloqueio na operadora",u:"legislacao-sms.html"},
+  {t:"SMS avulso via operadoras",d:"Vivo, Claro, TIM, Oi e plataformas web",u:"sms-avulso-operadoras.html"},
+  {t:"SMS em massa por chipeiras",d:"Hardware GSM para disparo em volume",u:"sms-massa-chipeiras.html"},
+  {t:"Manual do App",d:"Guia completo de uso do SMSMass, tudo em uma pagina",u:"manual.html"},
+  {t:"Requisitos",d:"O que o celular precisa ter para rodar o SMSMass",u:"manual.html#requisitos"},
+  {t:"Instalacao",d:"Instalar o APK e conceder permissao de SMS",u:"manual.html#instalacao"},
+  {t:"Reinstalacao",d:"Como reinstalar o app corretamente",u:"manual.html#reinstalacao"},
+  {t:"Legislacao",d:"Base legal LGPD e regras para uso eleitoral",u:"manual.html#legislacao"},
+  {t:"Criando sua mensagem",d:"Limite de 160 caracteres e mesclagem com a planilha",u:"manual.html#criando-mensagem"},
+  {t:"Link dos contatos",d:"Modelo de planilha e preparacao do Google Sheets",u:"manual.html#obter-contatos"},
+  {t:"Contatos da agenda",d:"Escolher contatos direto da agenda do celular, sem planilha",u:"manual.html#contatos-agenda"},
+  {t:"Como ativar a licenca",d:"Trial e planos pagos",u:"manual.html#ativar-licenca"},
+  {t:"Intervalo entre disparos",d:"Ajuste de tempo entre SMS",u:"manual.html#intervalo-disparos"},
+  {t:"Usar intervalo De/Ate",d:"Disparar parte da lista",u:"manual.html#intervalo-de-ate"},
+  {t:"Enviando",d:"O que aparece na tela durante o disparo",u:"manual.html#enviando"},
+  {t:"Ler o relatorio",d:"Interpretacao do report de envios",u:"manual.html#relatorio"},
+  {t:"Envio avulso",d:"Enviar SMS para um contato ou poucos",u:"manual.html#envio-avulso"},
+  {t:"Possiveis problemas",d:"Envio parou, limite do plano com saldo, tela apagada, retomar com De/Ate, onde fica o relatorio",u:"manual.html#possiveis-problemas"},
+  {t:"Manual - Perguntas frequentes",d:"Duvidas comuns sobre o app",u:"manual.html#faq"},
+  {t:"Ajuda",d:"FAQ geral e contato",u:"ajuda.html"},
+  {t:"Mapa do site",d:"Todas as páginas do SMSMass em um só lugar",u:"mapa-do-site.html"}
+];
+
+function normalizar(s){
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function buscar(q){
+  const nq = normalizar(q);
+  if(nq.length < 2) return [];
+  return searchIndex.filter(i =>
+    normalizar(i.t).includes(nq) || normalizar(i.d).includes(nq)
+  ).slice(0,10);
+}
+function renderResultados(items){
+  const box = document.getElementById("searchResults");
+  if(items.length === 0){
+    box.innerHTML = '<div class="rempty">Nada encontrado.</div>';
+    box.classList.add("show");
+    return;
+  }
+  box.innerHTML = items.map(i =>
+    '<a href="' + i.u + '"><div class="rtitle">' + i.t + '</div><div class="rsnippet">' + i.d + '</div></a>'
+  ).join("");
+  box.classList.add("show");
+}
+document.addEventListener("DOMContentLoaded", function(){
+  const inp = document.getElementById("siteSearch");
+  const box = document.getElementById("searchResults");
+  if(inp){
+    inp.addEventListener("input", function(){
+      const r = buscar(this.value);
+      if(this.value.trim().length < 2){ box.classList.remove("show"); return; }
+      renderResultados(r);
+    });
+    inp.addEventListener("blur", function(){ setTimeout(()=>box.classList.remove("show"), 200); });
+    inp.addEventListener("focus", function(){ if(this.value.trim().length >= 2){ renderResultados(buscar(this.value)); } });
+  }
+});
+
+// Compartilhar site
+function compartilharSite(){
+  const url = "https://smsmass.com.br";
+  const txt = "Olha o site do SMSMass - disparo de SMS em massa direto do celular Android: " + url;
+  if(navigator.share){
+    navigator.share({title:"SMSMass", text:"Disparo de SMS em massa", url:url}).catch(()=>{});
+  } else {
+    window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank");
+  }
+}
+</script>
+
+<script>
+if (window.innerWidth <= 768 && !localStorage.getItem('menuHintVisto')) {
+  var hint = document.getElementById('menuHint');
+  if (hint) { hint.classList.add('show'); }
+}
+</script>
+</body>
+</html>

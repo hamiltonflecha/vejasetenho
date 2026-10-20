@@ -3,20 +3,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<title>Veja se Tenho — descontos indevidos, consignado e benefícios do INSS</title>
-<meta name="description" content="Veja se você tem descontos indevidos no benefício do INSS ou na conta bancária, refinanciamento ou novo consignado não reconhecido, e a viabilidade de aposentadoria, LOAS e BPC.">
-<link rel="canonical" href="https://vejasetenho.com.br/">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link rel="shortcut icon" href="favicon.ico">
+
+<title>SMSMass — Disparo de SMS em Massa pelo Celular</title>
+<meta name="description" content="Envie SMS em massa direto do seu celular Android. Disparo personalizado, sem depender de internet do destinatário. Teste já grátis, planos a partir de R$79.">
+<link rel="canonical" href="https://smsmass.com.br/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Veja se Tenho">
-<meta property="og:description" content="Veja se você tem descontos indevidos no benefício do INSS ou na conta bancária, refinanciamento ou novo consignado não reconhecido, e a viabilidade de aposentadoria, LOAS e BPC.">
-<meta property="og:url" content="https://vejasetenho.com.br/">
+<meta property="og:title" content="SMSMass — Disparo de SMS em massa">
+<meta property="og:description" content="Envie SMS em massa direto do celular Android. Disparo personalizado, sem depender de internet do destinatário. Teste já grátis.">
+<meta property="og:url" content="https://smsmass.com.br/">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Veja se Tenho">
-<meta name="twitter:description" content="Veja se você tem descontos indevidos no benefício do INSS ou na conta bancária, refinanciamento ou novo consignado não reconhecido, e a viabilidade de aposentadoria, LOAS e BPC.">
+<meta name="twitter:title" content="SMSMass — Disparo de SMS em massa">
+<meta name="twitter:description" content="Envie SMS em massa direto do celular Android. Disparo personalizado, sem depender de internet do destinatário. Teste já grátis.">
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=57">
+<style>
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:#fff;border-bottom:1px solid var(--line);
+  height:54px;display:flex;align-items:center;
+  -webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;
+}
+.topbar-inner{
+  width:100%;padding:0 24px;
+  display:flex;align-items:center;justify-content:flex-start;gap:20px;
+}
+.topbar .brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;}
+.topbar .brand span{color:var(--green);}
+.topbar nav{display:flex;gap:18px;font-size:.88rem;margin-left:170px;}
+.topbar nav a{color:var(--green);}
+.topbar nav a:hover{color:var(--navy);text-decoration:none;}
+
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.topbar-search{
+  display:flex;align-items:center;background:var(--paper-dim);
+  border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:.85rem;
+}
+.topbar-search input{
+  border:none;background:transparent;outline:none;font-size:.85rem;width:160px;
+  color:var(--navy);font-family:'Inter',sans-serif;
+}
+.topbar-search input::placeholder{color:var(--slate);}
+.topbar-search .search-icon{color:var(--slate);margin-right:6px;}
+.topbar-help{color:var(--green);font-size:.88rem;text-decoration:none;}
+.topbar-help:hover{color:var(--navy);text-decoration:none;}
+
+.topbar-icons{display:flex;align-items:center;gap:10px;margin-left:4px;}
+.icon-link{color:#fff;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;transition:transform .12s, opacity .12s;line-height:0;}
+.icon-link svg{width:19px;height:19px;}
+.icon-link:hover{transform:scale(1.08);opacity:.88;}
+.icon-link.icon-share{background:#37474F;}
+.icon-link.icon-whats{background:#25D366;}
+.icon-link.icon-email{background:#1A73E8;}
+
+.aviso-especial{color:#C0392B;font-weight:700;}
+.sidebar-version{padding:4px 18px 12px;color:var(--slate);font-size:.72rem;letter-spacing:.04em;font-family:monospace;}
+
+.hero .lede{margin-bottom:0;}
+.hero-checks{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px 22px;}
+.hero-checks li{font-size:.92rem;color:var(--navy);padding-left:20px;position:relative;}
+.hero-checks li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:600;}
+
+.plans{display:grid;gap:20px;margin-top:32px;}
+@media(min-width:640px){.plans{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:960px){.plans{grid-template-columns:repeat(4,1fr);}}
+
+.plan{
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:24px;
+  background:var(--paper);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.plan.destaque{
+  border-color:var(--green);
+  border-width:2px;
+  position:relative;
+}
+.badge{
+  position:absolute;
+  top:-13px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--green);
+  color:#fff;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:3px 12px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+.plan-nome{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600;line-height:1.4;}
+.plan-nome .plan-qtd{display:block;font-family:'IBM Plex Mono',monospace;font-size:.9rem;font-weight:600;color:var(--green);letter-spacing:.02em;}
+.plan-preco{font-family:'IBM Plex Mono',monospace;font-size:2rem;font-weight:600;color:var(--navy);}
+.plan-preco span{font-size:.95rem;font-weight:400;color:var(--slate);}
+.plan-desc{color:var(--slate);font-size:.92rem;line-height:1.5;}
+.plan-items{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
+.plan-items li{font-size:.92rem;padding-left:18px;position:relative;}
+.plan-items li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:600;}
+.plan-btn{
+  display:block;
+  text-align:center;
+  padding:12px;
+  border-radius:4px;
+  font-weight:600;
+  font-size:.95rem;
+  margin-top:auto;
+  border:2px solid var(--navy);
+  color:var(--navy);
+  transition:background .15s, color .15s;
+}
+.plan-btn:hover{background:var(--dark-green);color:#fff;text-decoration:none;}
+.plan.destaque .plan-btn{background:var(--dark-green);color:#fff;}
+.plan.destaque .plan-btn:hover{background:var(--dark-green-hover);}
+
+.garantia{
+  margin-top:28px;
+  border-top:1px solid var(--line);
+  padding-top:24px;
+  color:var(--slate);
+  font-size:.9rem;
+  text-align:center;
+}
+
+.faq{margin-top:14px;}
+.faq-item{border-bottom:1px solid var(--line);padding:16px 0;}
+.faq-item summary{font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+.faq-item summary::before{content:'●';font-size:.6rem;color:var(--green);margin-right:10px;}
+.faq-item summary::after{content:'+';font-size:1.2rem;color:var(--slate);}
+.faq-item[open] summary::after{content:'−';}
+.faq-item p{margin:12px 0 0;color:var(--slate);font-size:.92rem;padding-left:20px;}
+
+/* Search results dropdown */
+.search-results{
+  position:fixed;top:54px;right:24px;
+  background:#fff;border:1px solid var(--line);border-radius:4px;
+  width:340px;max-height:400px;overflow-y:auto;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  z-index:200;display:none;
+}
+.search-results.show{display:block;}
+.search-results a{
+  display:block;padding:10px 14px;color:var(--navy);
+  border-bottom:1px solid var(--line);text-decoration:none;font-size:.88rem;
+}
+.search-results a:last-child{border-bottom:none;}
+.search-results a:hover{background:var(--paper-dim);}
+.search-results .rtitle{color:var(--green);}
+.search-results .rsnippet{color:var(--slate);font-size:.8rem;margin-top:2px;}
+.search-results .rempty{padding:14px;color:var(--slate);font-size:.85rem;text-align:center;}
+
+/* Sidebar */
+.sidebar{
+  position:fixed;top:54px;left:0;bottom:0;width:230px;
+  background:var(--paper-dim);border-right:1px solid var(--line);
+  overflow-y:auto;padding:20px 0;
+  -webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;
+}
+.sidebar-group{margin-bottom:8px;}
+.sidebar-label{
+  font-family:'Inter',sans-serif;
+  font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;
+  color:#000;font-weight:700;padding:14px 18px 4px;
+}
+.sidebar-group.compact a{padding:4px 18px;}
+.sidebar a{
+  display:block;padding:7px 18px;font-size:.88rem;color:var(--green);
+  border-left:2px solid transparent;transition:border-color .12s, background .12s;
+  text-decoration:none;
+}
+.sidebar a:hover{background:var(--paper);border-left-color:var(--green);text-decoration:none;color:var(--navy);}
+.sidebar a.ativo{border-left-color:var(--green-bright);color:var(--green);font-weight:600;}
+
+.sidebar .sublist{
+  list-style:disc;
+  margin:0 0 4px 42px;
+  padding:0;
+}
+.sidebar .sublist li{margin:0;padding:0;}
+.sidebar .sublist a{
+  display:block;padding:3px 0;font-size:.82rem;color:var(--green);
+  border-left:none;
+}
+.sidebar .sublist a:hover{color:var(--navy);background:transparent;text-decoration:underline;}
+
+/* Sidebar: grupos colapsáveis (details/summary) */
+.sidebar details{margin:0;}
+.sidebar summary{
+  list-style:none;cursor:pointer;display:block;
+  padding:7px 18px;font-size:.88rem;
+}
+.sidebar summary::-webkit-details-marker{display:none;}
+.sidebar summary::after{content:'+';color:var(--slate);font-family:monospace;}
+.sidebar details[open] summary::after{content:'−';}
+.sidebar summary a{display:inline;padding:0;border-left:none;}
+.sidebar summary:hover{background:var(--paper);}
+.sidebar details .sublist{margin-top:0;}
+.sidebar .sublist + details summary{padding-top:2px;}
+
+/* Main content */
+.main{margin-left:230px;margin-top:54px;min-height:calc(100vh - 54px);}
+
+/* Hamburger mobile */
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
+.menu-toggle span{display:block;width:22px;height:2px;background:var(--navy);margin:4px 0;}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .2s;}
+  .sidebar.open{transform:translateX(0);}
+  .main{margin-left:0;}
+  .menu-toggle{display:block;}
+  .topbar nav{display:none;}
+}
+@media(max-width:1024px){
+  .topbar-search{display:none;}
+  .topbar-inner{padding:0 14px;gap:10px;}
+  .topbar-icons{gap:6px;flex-shrink:0;}
+  .icon-link{width:30px;height:30px;border-radius:8px;flex-shrink:0;}
+  .icon-link svg{width:16px;height:16px;}
+}
+</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffffff">
+<script src="pwa.js" defer></script>
 </head>
 <body>
 
@@ -24,17 +241,21 @@
 <div class="topbar">
   <div class="topbar-inner">
     <div style="display:flex;align-items:center;gap:12px;">
-      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Menu">
+      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open'); document.getElementById('menuHint').classList.remove('show'); localStorage.setItem('menuHintVisto','1');" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
-      <div class="brand"><a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:7px;"><img src="favicon.svg" alt="" style="width:24px;height:24px;border-radius:6px;">Veja se<span>Tenho</span></a></div>
+      <div class="menu-hint" id="menuHint">↖ Abra o menu</div>
+      <div class="brand"><a href="index.html" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:7px;"><img src="favicon-32.png" alt="" style="width:24px;height:24px;border-radius:6px;">SMS<span>Mass</span></a></div>
     </div>
     <nav>
       <a href="index.html" class="ativo">Início</a>
-      <a href="index.html#veja-se-tenho">Veja se tenho</a>
-      <a href="documentos.html">Documentos</a>
-      <a href="viabilidade-beneficios.html">Viabilidade</a>
+      <a href="#planos">Produtos</a>
+      <a href="index.html#ferramentas">Ferramentas</a>
+      <a href="index.html#artigos">Artigos</a>
+      <a href="#planos">Planos</a>
+      <a href="manual.html">Manual</a>
       <a href="ajuda.html">Ajuda</a>
+      <a href="mapa-do-site.html">Mapa do site</a>
     </nav>
     <div class="topbar-right">
       <div class="topbar-search">
@@ -43,7 +264,8 @@
       </div>
       <div class="topbar-icons">
         <a href="#" onclick="event.preventDefault();compartilharSite();" class="icon-link icon-share" aria-label="Compartilhar" title="Compartilhar"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L7.04 9.81C6.5 9.31 5.79 9 5 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg></a>
-        <a href="mailto:contato@vejasetenho.com.br" class="icon-link icon-email" aria-label="Enviar e-mail" title="Enviar e-mail"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+        <a href="https://wa.me/5531991271321?text=Ol%C3%A1%2C%20vim%20pelo%20site%20SMSMass" target="_blank" rel="noopener" class="icon-link icon-whats" aria-label="Falar no WhatsApp" title="Falar no WhatsApp"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.77.46 3.45 1.27 4.9L2 22l5.24-1.24C8.63 21.55 10.27 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.1c-.22.62-1.28 1.2-1.77 1.24-.45.05-.92.22-3.1-.65-2.62-1.05-4.3-3.68-4.44-3.85-.13-.18-1.05-1.4-1.05-2.67 0-1.27.67-1.89.9-2.15.23-.25.5-.31.67-.31h.47c.15 0 .35-.03.55.42.22.5.75 1.78.81 1.9.07.14.11.29.02.47-.08.18-.13.29-.26.44-.13.16-.28.35-.4.47-.13.13-.27.28-.11.55.15.28.7 1.16 1.51 1.88 1.04.92 1.92 1.22 2.2 1.36.28.14.44.13.6-.04.18-.18.72-.83.91-1.11.2-.29.4-.24.65-.14.27.09 1.67.77 1.95.92.28.14.47.21.55.33.07.11.07.66-.15 1.25z"/></svg></a>
+        <a href="mailto:dev-io@outlook.com" class="icon-link icon-email" aria-label="Enviar e-mail" title="Enviar e-mail"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
       </div>
     </div>
   </div>
@@ -52,177 +274,419 @@
 
 <!-- Sidebar esquerda -->
 <div class="sidebar">
-<div class="sidebar-version">v1.0</div>
-<div class="sidebar-group">
-<div class="sidebar-label">Início</div>
-<a href="index.html" class="ativo">Home</a>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-label">Veja se tenho</div>
-<a href="refinanciamento.html">Refin (grátis)</a>
-<a href="novo-emprestimo.html">Novo (grátis)</a>
-<a href="portabilidade.html">Portabilidade (grátis)</a>
-<a href="margem-consignavel.html">Margem consignável</a>
-<ul class="sublist">
-<li><a href="margem-consignavel.html#previsao">Previsão</a></li>
-<li><a href="margem-consignavel.html#positiva">Margem positiva — valor a receber</a></li>
-<li><a href="margem-consignavel.html#negativa">Margem negativa</a></li>
-</ul>
-<a href="descontos-indevidos.html">Descontos indevidos</a>
-<ul class="sublist">
-<li><a href="descontos-indevidos.html#beneficio">No benefício</a></li>
-<li><a href="descontos-indevidos.html#conta">Na conta bancária</a></li>
-</ul>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-label">Estudos de viabilidade</div>
-<a href="viabilidade-beneficios.html">Aposentadoria, LOAS e BPC</a>
-<a href="acoes-inss-bancos.html">Ações contra INSS e bancos</a>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-label">Documentos necessários</div>
-<a href="documentos.html">Índice de documentos</a>
-<ul class="sublist">
-<li><a href="documentos.html#cnis">CNIS</a></li>
-<li><a href="documentos.html#extrato-consignado">Extrato de empréstimos consignados</a></li>
-<li><a href="documentos.html#extrato-bancario">Extrato bancário</a></li>
-<li><a href="documentos.html#historico-creditos">Histórico de créditos (SCR)</a></li>
-</ul>
-</div>
-<div class="sidebar-group">
-<div class="sidebar-label">Ajuda</div>
-<a href="ajuda.html">Perguntas frequentes</a>
-</div>
+  <div class="sidebar-version">v081</div>
+  <div class="sidebar-group compact">
+    <div class="sidebar-label">Início</div>
+    <a href="index.html">Home</a>
+    <a href="loja.html">Loja</a>
+    <a href="afiliados.html">Programa de Afiliados</a>
+    <a href="mapa-do-site.html">Mapa do site</a>
+    <a href="#" class="pwa-instalar" style="display:none">📲 Instalar no celular</a>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-label">Ferramentas</div>
+    <a href="index.html">O app SMSMass</a>
+    <ul class="sublist">
+      <li><a href="index.html#o-que-faz">O que faz</a></li>
+      <li><a href="index.html#planos">Invista já</a></li>
+    </ul>
+    <details>
+      <summary><a href="planos.html">Planos</a></summary>
+      <ul class="sublist">
+        <li><a href="planos.html#planos">Planos e preços</a></li>
+        <li><a href="planos.html#faq">Perguntas frequentes</a></li>
+        <li><a href="manual.html#ativar-licenca">Ativar minha licença</a></li>
+        <li><a href="manual.html#ativar-licenca">Recuperar minha chave</a></li>
+      </ul>
+    </details>
+    <details>
+      <summary><a href="manual.html">Manual</a></summary>
+      <ul class="sublist">
+        <li><a href="manual.html#conhecendo-o-app">Conhecendo o app</a></li>
+        <li><a href="manual.html#como-usar">Como usar</a></li>
+        <li><a href="manual.html#requisitos">Requisitos</a></li>
+        <li><a href="manual.html#instalacao">Instalação</a></li>
+        <li><a href="manual.html#reinstalacao">Reinstalação</a></li>
+        <li><a href="manual.html#legislacao">Legislação</a></li>
+        <li><a href="manual.html#criando-mensagem">Criando sua mensagem</a></li>
+        <li><a href="manual.html#obter-contatos">Link dos contatos</a></li>
+        <li><a href="manual.html#ativar-licenca">Ativar ou recuperar a licença</a></li>
+        <li><a href="manual.html#intervalo-disparos">Intervalo entre disparos</a></li>
+        <li><a href="manual.html#intervalo-de-ate">Usar intervalo De/Até</a></li>
+        <li><a href="manual.html#enviando">Enviando</a></li>
+        <li><a href="manual.html#relatorio">Ler o relatório</a></li>
+        <li><a href="manual.html#envio-avulso">Envio avulso</a></li>
+        <li><a href="manual.html#possiveis-problemas">Possíveis problemas</a></li>
+        <li><a href="manual.html#faq">Perguntas frequentes</a></li>
+      </ul>
+    </details>
+    <a href="consulta-operadora.html">Consulta de operadora em lote</a>
+    <ul class="sublist">
+      <li><a href="consultas-executar.html">Consulte já</a></li>
+      <li><a href="consulta-operadora.html#como-funciona">Como funciona</a></li>
+      <li><a href="consulta-operadora.html#precos">Preços</a></li>
+      <li><a href="simulador-operadora.html#portabilidade">Portabilidade numérica</a></li>
+      <li><a href="consulta-operadora.html#faq">Perguntas frequentes</a></li>
+      <li><a href="sua-consulta.html">Sua consulta</a></li>
+      <li><a href="simulador-operadora.html#abr">Consulta oficial ABR</a></li>
+    </ul>
+    <a href="contador-caracteres.html">Contador de caracteres</a>
+    <ul class="sublist">
+      <li><a href="contador-caracteres.html#teste">Teste sua mensagem</a></li>
+      <li><a href="contador-caracteres.html#gsm7">Como funciona GSM-7</a></li>
+      <li><a href="contador-caracteres.html#ucs2">Como funciona UCS-2</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-label">Como o SMS funciona</div>
+    <details>
+      <summary><a href="como-sms-trafega.html">Como o SMS trafega</a></summary>
+      <ul class="sublist">
+      <li><a href="como-sms-trafega.html#smsc">SMSC</a></li>
+      <li><a href="como-sms-trafega.html#smpp-ss7">SMPP e SS7</a></li>
+    </ul>
+    </details>
+    <details>
+      <summary><a href="gsm7-ucs2.html">GSM-7 vs UCS-2</a></summary>
+      <ul class="sublist">
+      <li><a href="gsm7-ucs2.html#padrao-gsm7">O padrão GSM-7</a></li>
+      <li><a href="gsm7-ucs2.html#quando-ucs2">Quando UCS-2 ativa</a></li>
+    </ul>
+    </details>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-label">Comparação e uso</div>
+    <a href="rcs.html">RCS</a>
+    <a href="sms-vs-whatsapp.html">SMS vs WhatsApp vs RCS</a>
+    <details>
+      <summary><a href="legislacao-sms.html">SMS marketing e LGPD</a></summary>
+      <ul class="sublist">
+      <li><a href="legislacao-sms.html#opt-out">Opt-out</a></li>
+      <li><a href="legislacao-sms.html#bloqueio">Bloqueio na operadora</a></li>
+    </ul>
+    </details>
+  </div>
+
+  <div class="sidebar-group">
+    <div class="sidebar-label">Recursos externos</div>
+    <details>
+      <summary><a href="sms-avulso-operadoras.html">SMS avulso via operadoras</a></summary>
+      <ul class="sublist">
+      <li><a href="sms-avulso-operadoras.html#tarifas">Tarifas das operadoras</a></li>
+      <li><a href="sms-avulso-operadoras.html#plataformas">Plataformas web</a></li>
+      <li><a href="sms-avulso-operadoras.html#avulso-faq">Perguntas frequentes</a></li>
+    </ul>
+    </details>
+    <details>
+      <summary><a href="sms-massa-chipeiras.html">SMS em massa por chipeiras</a></summary>
+      <ul class="sublist">
+      <li><a href="sms-massa-chipeiras.html#o-que-e">O que é uma chipeira</a></li>
+      <li><a href="sms-massa-chipeiras.html#custo">Componentes do custo</a></li>
+      <li><a href="sms-massa-chipeiras.html#comprar">Onde comprar</a></li>
+      <li><a href="sms-massa-chipeiras.html#chipeira-faq">Perguntas frequentes</a></li>
+    </ul>
+    </details>
+  </div>
+
+  <div class="sidebar-scroll-hint"><span>↓</span></div>
 </div>
 
 <div class="main">
 
-
   <div class="hero" id="inicio">
     <div class="wrap">
-      <div class="hop">Ponto de partida</div>
-      <h1>Veja se você tem descontos indevidos no seu benefício do INSS ou na sua conta bancária.</h1>
-      <p class="lede">Analisamos empréstimos consignados do INSS, descontos em benefícios e em contas bancárias, e a viabilidade de aposentadoria, LOAS, BPC e outros recursos junto ao INSS. Tudo em linguagem simples, para você entender o que está acontecendo com o seu dinheiro antes de decidir o próximo passo.</p>
-      <a href="#veja-se-tenho" class="btn" style="margin-top:16px;">Veja se tenho</a>
+      <div class="hop">SMSMass</div>
+      <h1>SMS em massa pelo celular</h1>
+      <p class="lede">Direto do chip do seu celular Android — alta taxa de leitura, sem depender de internet de quem recebe. O SMSMass permite que você envie um número predeterminado de mensagens usando a franquia de SMS que já tem com sua operadora. Vale lembrar que muitos planos atuais incluem SMS ilimitado.</p>
+      <p class="lede" style="font-size:.95rem;margin-top:-6px;">O SMSMass é ideal para correspondentes bancários, pequenos comércios, cobranças, campanhas e candidatos, vendas, ofertas, avisos, etc.</p>
+      <a href="#planos" class="btn" style="margin-top:16px;display:inline-block;">Versão grátis para teste e planos a partir de R$ 79</a>
     </div>
   </div>
 
-  <section id="sobre">
+  <section id="planos">
     <div class="wrap">
-      <div class="hop">O que fazemos aqui</div>
-      <h2>Descontos consignados, benefícios e contas bancárias — sob a lupa</h2>
-      <p>Tratamos aqui de empréstimos consignados do INSS e de descontos indevidos nos benefícios. Analisamos esses descontos e também os descontos em contas bancárias, para ajudar você a entender se algum valor está sendo cobrado sem sua autorização ou fora do que foi contratado.</p>
-      <p>A partir dessa análise, estudamos a hipótese de ações contra o INSS e contra bancos. <strong>Não somos advogados</strong> — fazemos uma análise crítica dos seus documentos e sugerimos possíveis caminhos. Cabe a você consultar um(a) advogado(a) sempre que nossas sugestões apontarem nessa direção.</p>
-      <p>Também estudamos a viabilidade de aposentadorias, LOAS, BPC e outros recursos disponíveis junto ao INSS, para você saber se pode ter direito a algo que ainda não recebe.</p>
-      <div class="notice">
-        <strong>Aviso importante:</strong> este site oferece informação e análise crítica de caráter educativo. Não somos um escritório de advocacia nem substituímos aconselhamento jurídico, contábil ou financeiro profissional. Quando a situação indicar a necessidade, recomendamos a consulta a um(a) advogado(a) de confiança.
+      <div class="hop">Escolha já</div>
+
+      <div class="plans">
+
+        <div class="plan">
+          <div class="plan-nome">Trial Grátis<br><span class="plan-qtd">5 SMS</span></div>
+          <div class="plan-preco">R$0 <span>sem cartão</span></div>
+          <p class="plan-desc">Teste o app antes de comprar, sem compromisso.</p>
+          <ul class="plan-items">
+            <li>5 SMS gratuitos</li>
+            <li>Personalização por nome e valor</li>
+            <li>Controle de horário de disparo</li>
+            <li>Relatório de envios</li>
+            <li>Chave TRIAL no app</li>
+          </ul>
+          <a class="plan-btn" href="downloads/smsmass.apk" rel="noopener" download>Baixar o app</a>
+        </div>
+
+        <div class="plan">
+          <div class="plan-nome">SMSMass<br><span class="plan-qtd">2.000 SMS</span></div>
+          <div class="plan-preco">R$79 <span>pagamento único</span></div>
+          <p class="plan-desc">Para quem está começando ou faz campanhas menores.</p>
+          <ul class="plan-items">
+            <li>2.000 SMS por ciclo</li>
+            <li>Personalização por nome e valor</li>
+            <li>Controle de horário de disparo</li>
+            <li>Relatório de envios</li>
+            <li>Contatos via Google Sheets</li>
+          </ul>
+          <a class="plan-btn" href="https://pay.kiwify.com.br/qPHLTol" target="_blank" rel="noopener">Comprar agora</a>
+        </div>
+
+        <div class="plan destaque">
+          <div class="badge">Mais popular</div>
+          <div class="plan-nome">SMSMass<br><span class="plan-qtd">5.000 SMS</span></div>
+          <div class="plan-preco">R$119 <span>pagamento único</span></div>
+          <p class="plan-desc">Para operações ativas com campanhas semanais regulares.</p>
+          <ul class="plan-items">
+            <li>5.000 SMS por ciclo</li>
+            <li>Personalização por nome e valor</li>
+            <li>Controle de horário de disparo</li>
+            <li>Relatório de envios</li>
+            <li>Contatos via Google Sheets</li>
+          </ul>
+          <a class="plan-btn" href="https://kiwify.app/PnlMrzT" target="_blank" rel="noopener">Comprar agora</a>
+        </div>
+
+        <div class="plan">
+          <div class="plan-nome">SMSMass<br><span class="plan-qtd">Ilimitado</span></div>
+          <div class="plan-preco">R$249 <span>pagamento único</span></div>
+          <p class="plan-desc">Para quem faz disparo em volume alto com frequência.</p>
+          <ul class="plan-items">
+            <li>SMS ilimitados</li>
+            <li>Personalização por nome e valor</li>
+            <li>Controle de horário de disparo</li>
+            <li>Relatório de envios</li>
+            <li>Contatos via Google Sheets</li>
+            <li>Sem restrição de ciclo</li>
+          </ul>
+          <a class="plan-btn" href="https://pay.kiwify.com.br/q9TvnAq" target="_blank" rel="noopener">Comprar agora</a>
+        </div>
+
+      </div>
+
+      <div class="garantia">
+        Pagamento processado pelo Kiwify com segurança. Após a confirmação, a chave de ativação é enviada automaticamente.
       </div>
     </div>
   </section>
 
-  <section id="veja-se-tenho">
+  <section id="o-que-faz">
     <div class="wrap">
-      <div class="hop">Veja se tenho</div>
-      <h2>Comece por aqui</h2>
-      <p>Escolha o que você quer verificar. As três primeiras análises são gratuitas.</p>
+      <div class="hop">SMSMass</div>
+      <h2 style="font-size:1.7rem;line-height:1.2;max-width:26ch;">O app SMSMass dispara SMS em massa direto do seu celular Android</h2>
+      <p class="lede">Monte um arquivo CSV com os números e o texto de cada contato, mesclando os dados na mensagem — o app dispara pelo chip do seu aparelho, quando você quiser, sem depender de internet no celular de quem recebe.</p>
+      <ul class="hero-checks">
+        <li>Mensagem personalizada por nome ou texto customizado, mesclando os dados do CSV</li>
+        <li>Limite de contatos que recebem a mensagem por unidade de tempo</li>
+        <li>Contador de caracteres, evitando que o SMS quebre em duas mensagens e onere o custo</li>
+        <li>Mostra o primeiro e o último contato da lista, pra confirmar que é a lista certa</li>
+        <li>Tempo mínimo e máximo entre cada SMS, pra evitar bloqueio do seu número</li>
+        <li>Progresso do envio em tempo real, durante o disparo</li>
+        <li>Relatório final com número, Texto 1 (ex: nome), data e hora de cada envio</li>
+        <li>Envio avulso: manda um único SMS pra um único número, na hora</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="ferramentas">
+    <div class="wrap">
+      <div class="hop">Ferramentas</div>
       <div class="grid grid-2">
-        <a class="tool-link" href="refinanciamento.html">
-          <div class="hop">Verificação</div>
-          <h3>Refin</h3>
-          <p>Veja se você já tem um refinanciamento de empréstimo consignado ativo no seu benefício.</p>
-          <span class="tag-gratis">Grátis</span>
+        <a class="tool-link" href="contador-caracteres.html">
+          <div class="hop">Ferramenta</div>
+          <h3>Contador de caracteres SMS</h3>
+          <p>Veja em tempo real quantos SMS sua mensagem vai gerar — e por que um acento pode dobrar o custo.</p>
         </a>
-        <a class="tool-link" href="novo-emprestimo.html">
-          <div class="hop">Verificação</div>
-          <h3>Novo</h3>
-          <p>Veja se foi contratado um novo empréstimo consignado em seu nome, com ou sem sua autorização.</p>
-          <span class="tag-gratis">Grátis</span>
+        <a class="tool-link" href="simulador-operadora.html">
+          <div class="hop">Ferramenta</div>
+          <h3>Simulador de operadora por DDD/prefixo</h3>
+          <p>Estimativa educativa da operadora de origem de um número — com aviso claro sobre os limites da portabilidade.</p>
         </a>
-        <a class="tool-link" href="portabilidade.html">
-          <div class="hop">Verificação</div>
-          <h3>Portabilidade</h3>
-          <p>Veja se houve portabilidade do seu consignado para outra instituição — e se as condições realmente melhoraram.</p>
-          <span class="tag-gratis">Grátis</span>
-        </a>
-        <a class="tool-link" href="margem-consignavel.html">
-          <div class="hop">Análise</div>
-          <h3>Margem</h3>
-          <p>Previsão de margem, margem positiva (valor a receber) e margem negativa — entenda o que cada uma significa.</p>
-        </a>
-        <a class="tool-link" href="descontos-indevidos.html">
-          <div class="hop">Análise</div>
-          <h3>Desconto indevido no benefício</h3>
-          <p>Identifique cobranças no seu benefício do INSS que você não reconhece ou não autorizou.</p>
-        </a>
-        <a class="tool-link" href="descontos-indevidos.html#conta">
-          <div class="hop">Análise</div>
-          <h3>Desconto indevido na conta bancária</h3>
-          <p>Identifique tarifas, seguros e descontos lançados na sua conta sem autorização clara.</p>
+        <a class="tool-link" href="consulta-operadora.html">
+          <div class="hop">Recurso pago</div>
+          <h3>Consulta de operadora em lote</h3>
+          <p>Consulte a operadora atual de toda a sua planilha de contatos, direto no app, antes de disparar a campanha.</p>
         </a>
       </div>
     </div>
   </section>
 
-  <section id="viabilidade">
+  <section id="artigos">
     <div class="wrap">
-      <div class="hop">Estudos de viabilidade</div>
+      <div class="hop">Como o sinal viaja</div>
       <div class="grid grid-2">
-        <a class="tool-link" href="viabilidade-beneficios.html">
-          <div class="hop">Estudo</div>
-          <h3>Aposentadoria, LOAS e BPC</h3>
-          <p>Veja se você pode ter direito a se aposentar agora, ou a benefícios assistenciais como LOAS e BPC.</p>
+        <a class="tool-link" href="como-sms-trafega.html">
+          <div class="hop">Artigo</div>
+          <h3>Como o SMS trafega pelas redes</h3>
+          <p>SMSC, SMPP, SS7: o caminho real de uma mensagem entre operadoras — e por que algumas demoram mais.</p>
         </a>
-        <a class="tool-link" href="acoes-inss-bancos.html">
-          <div class="hop">Estudo</div>
-          <h3>Ações contra INSS e bancos</h3>
-          <p>Entenda, em linhas gerais, quando uma situação costuma justificar buscar orientação jurídica.</p>
+        <a class="tool-link" href="gsm7-ucs2.html">
+          <div class="hop">Artigo</div>
+          <h3>GSM-7 vs UCS-2: o motivo do limite de 160 caracteres</h3>
+          <p>Por que "ã" custa mais caro que "a" — e como escrever para nunca pagar SMS em dobro.</p>
         </a>
       </div>
     </div>
   </section>
 
-  <section id="documentos-resumo">
+  <section>
     <div class="wrap">
-      <div class="hop">Antes de começar</div>
-      <h2>Os documentos que você vai precisar</h2>
-      <p>Para fazer qualquer uma dessas análises com segurança, você vai precisar de alguns documentos. Ensinamos o que são e como retirá-los, todos de forma gratuita.</p>
+      <div class="hop">Comparação e uso</div>
       <div class="grid grid-2">
-        <a class="tool-link" href="documentos.html#cnis">
-          <div class="hop">Documento</div>
-          <h3>CNIS</h3>
-          <p>Seu histórico de vínculos e contribuições ao INSS.</p>
+        <a class="tool-link" href="sms-vs-whatsapp.html">
+          <div class="hop">Artigo</div>
+          <h3>SMS vs WhatsApp vs RCS para cobrança e consignado</h3>
+          <p>Por que SMS ainda converte melhor que WhatsApp em campanhas de INSS e CLT — e quando trocar.</p>
         </a>
-        <a class="tool-link" href="documentos.html#extrato-consignado">
-          <div class="hop">Documento</div>
-          <h3>Extrato de empréstimos consignados</h3>
-          <p>Lista dos contratos ativos com desconto no seu benefício.</p>
-        </a>
-        <a class="tool-link" href="documentos.html#extrato-bancario">
-          <div class="hop">Documento</div>
-          <h3>Extrato bancário</h3>
-          <p>Movimentações e descontos lançados na sua conta.</p>
-        </a>
-        <a class="tool-link" href="documentos.html#historico-creditos">
-          <div class="hop">Documento</div>
-          <h3>Histórico de créditos</h3>
-          <p>Relatório do Banco Central (Registrato/SCR) com todas as operações de crédito em seu nome.</p>
+        <a class="tool-link" href="legislacao-sms.html">
+          <div class="hop">Artigo</div>
+          <h3>SMS marketing e a LGPD: o que é permitido</h3>
+          <p>Opt-out, consentimento e o que aprender com casos de bloqueio na operadora.</p>
         </a>
       </div>
-      <p style="margin-top:20px;"><a href="documentos.html" class="btn">Ver guia completo de documentos</a></p>
     </div>
   </section>
 
+  <section>
+    <div class="wrap">
+      <div class="hop">Perguntas frequentes</div>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>Quanto custa enviar SMS em massa?</summary>
+          <p>O SMSMass tem plano a partir de R$79 (2.000 SMS), R$119 (5.000 SMS) e R$249 no plano Ilimitado, todos em pagamento único, sem mensalidade. Também tem um Trial Grátis com 5 SMS pra testar antes de comprar.</p>
+        </details>
+        <details class="faq-item">
+          <summary>O SMS chega mesmo sem internet no celular de quem recebe?</summary>
+          <p>Sim. O SMS trafega pela rede da operadora (a mesma usada em ligação e torpedo comum), não pela internet. Quem recebe não precisa estar com Wi-Fi ou dados móveis ligados pra ler a mensagem.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Preciso de internet no meu celular pra disparar em massa?</summary>
+          <p>O app dispara direto pelo chip inserido no seu celular Android — sem depender de servidor externo. Uma conexão de internet é usada só pra carregar a lista de contatos da planilha, não pro envio em si.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Funciona com chip de qualquer operadora, inclusive Vivo?</summary>
+          <p>Sim, funciona com o chip de qualquer operadora brasileira inserido no aparelho. Se você quiser confirmar antes a operadora atual de cada número da sua lista, use a <a href="consulta-operadora.html">consulta de operadora em lote</a>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Existe plano de SMS em massa ilimitado?</summary>
+          <p>Sim, o plano SMSMass Ilimitado libera disparo sem limite de SMS por ciclo, em pagamento único de R$249. Veja todos os <a href="#planos">planos e preços</a>.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Meu chip pode ser bloqueado ao enviar em massa?</summary>
+          <p>Pode, principalmente com intervalo curto entre os envios ou volume alto de uma vez — as operadoras monitoram esse padrão. Por isso o app já abre com um tempo mínimo de 31s entre cada SMS, escolhido de forma aleatória dentro da faixa que você configurar. Enviar em horário comercial, em dias úteis, e sempre incluir uma forma de opt-out também ajuda bastante. Veja as <a href="manual.html#intervalo-disparos">boas práticas completas no manual</a>.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section style="text-align:center;">
+    <div class="wrap">
+      <a href="#planos" class="btn">Ver planos e baixar o app</a>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Quanto custa enviar SMS em massa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O SMSMass tem plano a partir de R$79 (2.000 SMS), R$119 (5.000 SMS) e R$249 no plano Ilimitado, todos em pagamento único, sem mensalidade. Também tem um Trial Grátis com 5 SMS pra testar antes de comprar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O SMS chega mesmo sem internet no celular de quem recebe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. O SMS trafega pela rede da operadora (a mesma usada em ligação e torpedo comum), não pela internet. Quem recebe não precisa estar com Wi-Fi ou dados móveis ligados pra ler a mensagem."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Preciso de internet no meu celular pra disparar em massa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O app dispara direto pelo chip inserido no seu celular Android, sem depender de servidor externo. Uma conexão de internet é usada só pra carregar a lista de contatos da planilha, não pro envio em si."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Funciona com chip de qualquer operadora, inclusive Vivo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim, funciona com o chip de qualquer operadora brasileira inserido no aparelho. O SMSMass também oferece uma consulta de operadora em lote para confirmar a operadora atual de cada número antes do disparo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Existe plano de SMS em massa ilimitado?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim, o plano SMSMass Ilimitado libera disparo sem limite de SMS por ciclo, em pagamento único de R$249."
+        }
+      }
+    ]
+  }
+  </script>
 
   <footer>
-    <div class="wrap">
-      Veja se Tenho — análise de descontos consignados do INSS e de contas bancárias, e estudo de viabilidade de benefícios previdenciários. Não somos um escritório de advocacia; nossas análises são de caráter informativo e não substituem a consulta a um(a) advogado(a).
-    </div>
+    <div class="wrap">SMSMass — ferramentas para correspondentes bancários que disparam SMS em massa. CNPJ 22.308.290/0001-78 · <a href="https://wa.me/5531991271321" target="_blank" rel="noopener">WhatsApp</a></div>
   </footer>
 
 </div><!-- /main -->
 
 <script>
-const searchIndex = [{"t": "Home", "d": "Página inicial do Veja se Tenho", "u": "index.html"}, {"t": "Refin (grátis)", "d": "Verifique se você já tem um refinanciamento de consignado ativo", "u": "refinanciamento.html"}, {"t": "Novo empréstimo (grátis)", "d": "Verifique se um novo consignado foi contratado em seu nome", "u": "novo-emprestimo.html"}, {"t": "Portabilidade (grátis)", "d": "Entenda e verifique portabilidades de consignado", "u": "portabilidade.html"}, {"t": "Margem consignável", "d": "Previsão de margem, margem positiva e margem negativa", "u": "margem-consignavel.html"}, {"t": "Descontos indevidos", "d": "Descontos indevidos no benefício e na conta bancária", "u": "descontos-indevidos.html"}, {"t": "Aposentadoria, LOAS e BPC", "d": "Estudo de viabilidade de aposentadoria, LOAS e BPC", "u": "viabilidade-beneficios.html"}, {"t": "Ações contra INSS e bancos", "d": "Análise crítica sobre possíveis ações judiciais e administrativas", "u": "acoes-inss-bancos.html"}, {"t": "Documentos necessários", "d": "CNIS, extrato de consignado, extrato bancário e histórico de créditos", "u": "documentos.html"}, {"t": "CNIS", "d": "O que é e como tirar o CNIS pelo Meu INSS", "u": "documentos.html#cnis"}, {"t": "Extrato de empréstimos consignados", "d": "Como emitir o extrato de consignado pelo Meu INSS", "u": "documentos.html#extrato-consignado"}, {"t": "Extrato bancário", "d": "Como obter o extrato bancário para análise de descontos", "u": "documentos.html#extrato-bancario"}, {"t": "Histórico de créditos", "d": "Registrato e SCR do Banco Central", "u": "documentos.html#historico-creditos"}, {"t": "Ajuda", "d": "Perguntas frequentes e contato", "u": "ajuda.html"}];
+// Search index: title, description, url
+const searchIndex = [
+  {t:"Home",d:"Página inicial do SMSMass",u:"index.html"},
+  {t:"Planos",d:"Trial, 2000, 5000 SMS ou ilimitado",u:"planos.html"},
+  {t:"Loja",d:"Todos os produtos: planos de SMS, consultas e afiliados",u:"loja.html"},
+  {t:"Consultas e Afiliados",d:"Consulta de operadora e portabilidade em lote",u:"consultas.html"},
+  {t:"Programa de Afiliados",d:"Ganhe comissão indicando o SMSMass",u:"afiliados.html"},
+  {t:"Contador de caracteres SMS",d:"GSM-7, UCS-2 e cálculo de segmentos",u:"contador-caracteres.html"},
+  {t:"Simulador de operadora",d:"Consulta oficial ABR e portabilidade",u:"simulador-operadora.html"},
+  {t:"Consulta de operadora em lote",d:"Recurso pago do site: consulta a operadora atual de toda a planilha",u:"consulta-operadora.html"},
+  {t:"Rodar consulta de operadora",d:"Consulte já: envie o CSV e receba o resultado por e-mail",u:"consultas-executar.html"},
+  {t:"Sua consulta",d:"Já é cliente? Rode sua consulta com os créditos que restarem",u:"sua-consulta.html"},
+  {t:"Como o SMS trafega",d:"SMSC, SMPP e SS7",u:"como-sms-trafega.html"},
+  {t:"GSM-7 vs UCS-2",d:"Por que o SMS tem limite de 160 caracteres",u:"gsm7-ucs2.html"},
+  {t:"SMS vs WhatsApp vs RCS",d:"Comparação para cobrança e consignado",u:"sms-vs-whatsapp.html"},
+  {t:"RCS",d:"Cobertura no Brasil e por que o SMSMass ainda nao envia por RCS",u:"rcs.html"},
+  {t:"SMS marketing e LGPD",d:"Opt-out e bloqueio na operadora",u:"legislacao-sms.html"},
+  {t:"SMS avulso via operadoras",d:"Vivo, Claro, TIM, Oi e plataformas web",u:"sms-avulso-operadoras.html"},
+  {t:"SMS em massa por chipeiras",d:"Hardware GSM para disparo em volume",u:"sms-massa-chipeiras.html"},
+  {t:"Manual do App",d:"Guia completo de uso do SMSMass, tudo em uma pagina",u:"manual.html"},
+  {t:"Requisitos",d:"O que o celular precisa ter para rodar o SMSMass",u:"manual.html#requisitos"},
+  {t:"Instalacao",d:"Instalar o APK e conceder permissao de SMS",u:"manual.html#instalacao"},
+  {t:"Reinstalacao",d:"Como reinstalar o app corretamente",u:"manual.html#reinstalacao"},
+  {t:"Legislacao",d:"Base legal LGPD e regras para uso eleitoral",u:"manual.html#legislacao"},
+  {t:"Criando sua mensagem",d:"Limite de 160 caracteres e mesclagem com a planilha",u:"manual.html#criando-mensagem"},
+  {t:"Link dos contatos",d:"Modelo de planilha e preparacao do Google Sheets",u:"manual.html#obter-contatos"},
+  {t:"Contatos da agenda",d:"Escolher contatos direto da agenda do celular, sem planilha",u:"manual.html#contatos-agenda"},
+  {t:"Como ativar a licenca",d:"Trial e planos pagos",u:"manual.html#ativar-licenca"},
+  {t:"Intervalo entre disparos",d:"Ajuste de tempo entre SMS",u:"manual.html#intervalo-disparos"},
+  {t:"Usar intervalo De/Ate",d:"Disparar parte da lista",u:"manual.html#intervalo-de-ate"},
+  {t:"Enviando",d:"O que aparece na tela durante o disparo",u:"manual.html#enviando"},
+  {t:"Ler o relatorio",d:"Interpretacao do report de envios",u:"manual.html#relatorio"},
+  {t:"Envio avulso",d:"Enviar SMS para um contato ou poucos",u:"manual.html#envio-avulso"},
+  {t:"Possiveis problemas",d:"Envio parou, limite do plano com saldo, tela apagada, retomar com De/Ate, onde fica o relatorio",u:"manual.html#possiveis-problemas"},
+  {t:"Manual - Perguntas frequentes",d:"Duvidas comuns sobre o app",u:"manual.html#faq"},
+  {t:"Ajuda",d:"FAQ geral e contato",u:"ajuda.html"},
+  {t:"Mapa do site",d:"Todas as páginas do SMSMass em um só lugar",u:"mapa-do-site.html"}
+];
 
 function normalizar(s){
   return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
@@ -260,16 +724,23 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 });
 
+// Compartilhar site
 function compartilharSite(){
-  const url = "https://vejasetenho.com.br";
-  const txt = "Veja se você tem direito a revisão de descontos do INSS ou de bancos: " + url;
+  const url = "https://smsmass.com.br";
+  const txt = "Olha o site do SMSMass - disparo de SMS em massa direto do celular Android: " + url;
   if(navigator.share){
-    navigator.share({title:"Veja se Tenho", text:"Análise de descontos consignados do INSS", url:url}).catch(()=>{});
+    navigator.share({title:"SMSMass", text:"Disparo de SMS em massa", url:url}).catch(()=>{});
   } else {
     window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank");
   }
 }
 </script>
 
+<script>
+if (window.innerWidth <= 768 && !localStorage.getItem('menuHintVisto')) {
+  var hint = document.getElementById('menuHint');
+  if (hint) { hint.classList.add('show'); }
+}
+</script>
 </body>
 </html>
